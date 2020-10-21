@@ -1,0 +1,13 @@
+.Rough {
+  border: 1px solid #eee;
+  box-shadow: 0 2px 3px #ccc;
+  padding: 2em;
+}
+
+.Rough h1 {
+  text-decoration: underline;
+}
+
+.Rough .Search {
+  margin: 1em;
+}
