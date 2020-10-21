@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using QxAPI.Models;
 
 namespace QxAPI.Controllers {
     [Route("api/Jobs")]
@@ -15,28 +17,13 @@ namespace QxAPI.Controllers {
         }
 
         // GET: api/Jobs/10-01-2020/10-05-2020
-        [HttpGet("{startDate}/{endDate}")]
-        public async Task<ActionResult<Job>> GetJobsByDate(DateTime startDate, DateTime endDate){
-            var jobs = await _context.Jobs.ToListAsync(startDate, endDate);
-
-            if (jobs == null){
-                return NotFound();
-            }
-
-            return jobs;
-        }
+        [HttpGet("{startDate}/{endDate}/{stage}")]
+        public async Task<IEnumerable<Job>> GetJobsByDate(DateTime startDate, DateTime endDate, string stage) => await _context.Jobs.Where(j => j.Job_Date >= startDate && j.Job_Date <= endDate && j.Job_Stage == stage).ToListAsync();
 
         // GET: api/Jobs/1451 Halsey
         [HttpGet("{address}")]
-        public async Task<ActionResult<Job>> GetJobsByAddress(string address){
-            var jobs = await _context.Jobs.ToListAsync(address);
+        public async Task<IEnumerable<Job>> GetJobsByAddress(string address) =>  await _context.Jobs.Where(j => j.Job_Site.Contains(address)).ToListAsync();
 
-            if (jobs == null){
-                return NotFound();
-            }
-
-            return jobs;
-        }
     }
 
     
