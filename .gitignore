@@ -21,3 +21,7 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+QxAPI/appsettings.json
+QxAPI/bin/*
+QxAPI/obj/*
+.vscode/tasks.json
