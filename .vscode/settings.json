@@ -3,11 +3,22 @@
         "catalog",
         "catalog cptxsql",
         "connectionstring",
+        "cpt",
         "cptxsql",
+        "database",
         "hsts",
+        "id",
+        "pass",
+        "password",
+        "qx",
+        "qxenterprise",
         "qxpress",
+        "server",
+        "server cpt qx qxenterprise database cptxsql user id test password pass",
+        "test",
         "topout",
         "use",
-        "use hsts"
+        "use hsts",
+        "user"
     ]
 }
