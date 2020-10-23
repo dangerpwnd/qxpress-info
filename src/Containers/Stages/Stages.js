@@ -29,6 +29,18 @@ class stages extends Component {
           placeholder: 'End Date'
         },
         value: ''
+      },
+      stage: {
+        elementType: 'select',
+        elementConfig: {
+          options: [
+            {value: 'Select Stage', displayValue: 'Select Stage'},
+            {value: 'Rough', displayValue: 'Rough'},
+            {value: 'Topout', displayValue: 'Topout'},
+            {value: 'Trim', displayValue: 'Trim'}
+          ]
+        },
+        value: ''
       }
     }
   };
@@ -66,7 +78,7 @@ class stages extends Component {
         });
     }
     if (formData.startDate && formData.endDate){
-      axios.get('/'+ formData.startDate + '/' + formData.endDate)
+      axios.get('/'+ formData.startDate + '/' + formData.endDate + '/' + formData.stage)
         .then((resp) => {
           console.log(resp);
         })
