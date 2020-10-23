@@ -22,6 +22,7 @@ namespace QxAPI
         {
             services.AddDbContext<JobContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("connectionstring")).EnableSensitiveDataLogging());
             services.AddControllers();
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -37,8 +38,11 @@ namespace QxAPI
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
             app.UseRouting();
+            app.UseCors(
+                options => options.WithOrigins("http://localhost:3000").AllowAnyMethod().AllowAnyHeader()
+            );
+            app.UseHttpsRedirection();
             app.UseAuthorization();
             app.UseEndpoints( endpoints => {
                 endpoints.MapControllers();

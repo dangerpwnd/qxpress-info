@@ -16,7 +16,7 @@ namespace QxAPI.Controllers {
             _context = context;
         }
 
-        // GET: api/Jobs/10-01-2020/10-05-2020
+        // GET: api/Jobs/10-01-2020/10-05-2020/Rough
         [HttpGet("{startDate}/{endDate}/{stage}")]
         public async Task<IEnumerable<Job>> GetJobsByDate(DateTime startDate, DateTime endDate, string stage) => await _context.Jobs.Where(j => j.Job_Date >= startDate && j.Job_Date <= endDate && j.Job_Stage == stage).ToListAsync();
 
