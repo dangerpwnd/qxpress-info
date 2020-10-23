@@ -4,6 +4,7 @@ import Input from "../../Components/UI/Input/Input";
 import Button from "../../Components/UI/Button/Button";
 
 class stages extends Component {
+
   state = {
     stageForm: {
       address: {
@@ -42,7 +43,8 @@ class stages extends Component {
         },
         value: ''
       }
-    }
+    },
+    jobData: []
   };
 
   inputChangeHandler = (event, inputId) => {
@@ -67,11 +69,13 @@ class stages extends Component {
     for (let formElementId in this.state.stageForm){
       formData[formElementId] = this.state.stageForm[formElementId].value;
     }
-    console.log(formData);
+
     if(formData.address){
       axios.get('/' + formData.address)
         .then((resp) => {
-          console.log(resp);
+          resp.data.length !== 0 ? 
+          this.setState({jobData : resp.data}): 
+          alert("No data available");
         })
         .catch((err) => {
           console.log(err);
@@ -80,14 +84,17 @@ class stages extends Component {
     if (formData.startDate && formData.endDate){
       axios.get('/'+ formData.startDate + '/' + formData.endDate + '/' + formData.stage)
         .then((resp) => {
-          console.log(resp);
+          resp.data.length !== 0 ? 
+          this.setState({jobData : resp.data}): 
+          alert("No data available");
         })
         .catch((err) => {
           console.log(err);
         });
     }
-    alert("Submit Complete!");
   }
+
+  displayResults = () => console.log(this.state.jobData);
 
 
   render() {
@@ -112,8 +119,8 @@ class stages extends Component {
             ))}
             <Button type="submit" btnType="Success">Pull Data</Button>
           </form>
-
-        </div>
+          <button onClick={this.displayResults}>See Results</button>
+      </div>
     );
   }
 }
