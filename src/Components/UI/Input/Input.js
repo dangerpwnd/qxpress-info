@@ -25,6 +25,12 @@ const input = ( props ) => {
                 </select>
             );
             break;
+        default:
+            inputElement = <input
+                {...props.elementConfig}
+                value = {props.value}
+                onChange = {props.changed} />;
+            break;
     }
     return (
         <div>
