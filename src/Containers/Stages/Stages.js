@@ -1,11 +1,8 @@
-import React, { Component } from "react";
-import "./App.css";
-import Stages from "../Components/Stages";
-import Input from "../Components/UI/Input/Input";
-import Button from "../Components/UI/Button/Button";
+import React, {Component} from "react";
+import Input from "../../Components/UI/Input/Input";
+import Button from "../../Components/UI/Button/Button";
 
-class App extends Component {
-
+class stages extends Component {
   state = {
     stages: [
       { id: 1, stage: "Rough", address: "", startDate: "", endDate: "" },
@@ -37,62 +34,7 @@ class App extends Component {
         },
         value: ''
       }
-    },
-    showJobs: true,
-  };
-
-  updateAddressHandler = (event, id) => {
-    const jobIndex = this.state.stages.findIndex((j) => {
-      return j.id === id;
-    });
-
-    const job = {
-      ...this.state.stages[jobIndex],
-    };
-
-    job.address = event.target.value;
-
-    const stages = [...this.state.stages];
-
-    stages[jobIndex] = job;
-
-    this.setState({ stages: stages });
-  };
-
-  updateStartDateHandler = (event, id) => {
-    const jobIndex = this.state.stages.findIndex((j) => {
-      return j.id === id;
-    });
-
-    const job = {
-      ...this.state.stages[jobIndex],
-    };
-
-    job.startDate = event.target.value;
-
-    const stages = [...this.state.stages];
-
-    stages[jobIndex] = job;
-
-    this.setState({ stages: stages });
-  };
-
-  updateEndDateHandler = (event, id) => {
-    const jobIndex = this.state.stages.findIndex((j) => {
-      return j.id === id;
-    });
-
-    const job = {
-      ...this.state.stages[jobIndex],
-    };
-
-    job.endDate = event.target.value;
-
-    const stages = [...this.state.stages];
-
-    stages[jobIndex] = job;
-
-    this.setState({ stages: stages });
+    }
   };
 
   inputChangeHandler = (event, inputId) => {
@@ -131,15 +73,8 @@ class App extends Component {
       });
     }
 
-    if (this.state.showJobs) {
-      stageJobs = (
-        <div className="FlexStages">
-          {/* <Stages
-            stages={this.state.stages}
-            changeAddress={this.updateAddressHandler}
-            changeStartDate={this.updateStartDateHandler}
-            changeEndDate={this.updateEndDateHandler}
-          /> */}
+    return (
+      <div className="FlexStages">
           <form onSubmit={() => this.submitFormHandler}>
             {formElementArray.map(formElement => (
               <Input 
@@ -152,16 +87,8 @@ class App extends Component {
             <Button type="submit" btnType="Success">Pull Data</Button>
           </form>
         </div>
-      );
-    }
-
-    return (
-      <div className="App">
-        <h1>Qxpress Job Reports</h1>
-        {stageJobs}
-      </div>
     );
   }
 }
 
-export default App;
+export default stages;
