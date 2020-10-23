@@ -1,14 +1,10 @@
 import React, {Component} from "react";
+import axios from "../../axios-stage";
 import Input from "../../Components/UI/Input/Input";
 import Button from "../../Components/UI/Button/Button";
 
 class stages extends Component {
   state = {
-    stages: [
-      { id: 1, stage: "Rough", address: "", startDate: "", endDate: "" },
-      { id: 2, stage: "Topout", address: "", startDate: "", endDate: "" },
-      { id: 3, stage: "Trim", address: "", startDate: "", endDate: "" },
-    ],
     stageForm: {
       address: {
         elementType: 'input',
@@ -38,7 +34,6 @@ class stages extends Component {
   };
 
   inputChangeHandler = (event, inputId) => {
-    console.log(event.target.value);
     
     const updatedForm = {
       ...this.state.stageForm
@@ -60,11 +55,30 @@ class stages extends Component {
     for (let formElementId in this.state.stageForm){
       formData[formElementId] = this.state.stageForm[formElementId].value;
     }
+    console.log(formData);
+    if(formData.address){
+      axios.get('/' + formData.address)
+        .then((resp) => {
+          console.log(resp);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+    if (formData.startDate && formData.endDate){
+      axios.get('/'+ formData.startDate + '/' + formData.endDate)
+        .then((resp) => {
+          console.log(resp);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+    alert("Submit Complete!");
   }
 
 
   render() {
-    let stageJobs = null;
     const formElementArray = [];
     for (let key in this.state.stageForm){
       formElementArray.push({
@@ -75,7 +89,7 @@ class stages extends Component {
 
     return (
       <div className="FlexStages">
-          <form onSubmit={() => this.submitFormHandler}>
+          <form onSubmit={this.submitFormHandler}>
             {formElementArray.map(formElement => (
               <Input 
                 key={formElement.id}
@@ -86,6 +100,7 @@ class stages extends Component {
             ))}
             <Button type="submit" btnType="Success">Pull Data</Button>
           </form>
+
         </div>
     );
   }
