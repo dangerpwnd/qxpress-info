@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import axios from "../../axios-stage";
 import Input from "../../Components/UI/Input/Input";
 import Button from "../../Components/UI/Button/Button";
+import "./Stages.css";
 
 class stages extends Component {
 
@@ -65,9 +66,62 @@ class stages extends Component {
 
   submitFormHandler = (event) => {
     event.preventDefault();
-    const formData = {};
+    let formData = {};
     for (let formElementId in this.state.stageForm){
       formData[formElementId] = this.state.stageForm[formElementId].value;
+    }
+
+    if (formData.address && formData.startDate && formData.endDate){
+      axios.get('/' + formData.address + '/'+ formData.startDate + '/' + formData.endDate + '/' + formData.stage)
+        .then((resp) => {
+          resp.data.length !== 0 ? 
+          this.setState({jobData : resp.data}): 
+          alert("No data available");
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+        .then (() => {
+          this.setState({stageForm: {
+            address: {
+              elementType: 'input',
+              elementConfig: {
+                type: 'text',
+                placeholder: 'Street Address'
+              },
+              value: ''
+            },
+            startDate: {
+              elementType: 'input',
+              elementConfig: {
+                type: 'date',
+                placeholder: 'Start Date'
+              },
+              value: ''
+            },
+            endDate: {
+              elementType: 'input',
+              elementConfig: {
+                type: 'date',
+                placeholder: 'End Date'
+              },
+              value: ''
+            },
+            stage: {
+              elementType: 'select',
+              elementConfig: {
+                options: [
+                  {value: 'Select Stage', displayValue: 'Select Stage'},
+                  {value: 'Rough', displayValue: 'Rough'},
+                  {value: 'Topout', displayValue: 'Topout'},
+                  {value: 'Trim', displayValue: 'Trim'}
+                ]
+              },
+              value: ''
+            }
+          }      
+        })
+        });
     }
 
     if(formData.address){
@@ -79,8 +133,51 @@ class stages extends Component {
         })
         .catch((err) => {
           console.log(err);
+        })
+        .then (() => {
+          this.setState({stageForm: {
+            address: {
+              elementType: 'input',
+              elementConfig: {
+                type: 'text',
+                placeholder: 'Street Address'
+              },
+              value: ''
+            },
+            startDate: {
+              elementType: 'input',
+              elementConfig: {
+                type: 'date',
+                placeholder: 'Start Date'
+              },
+              value: ''
+            },
+            endDate: {
+              elementType: 'input',
+              elementConfig: {
+                type: 'date',
+                placeholder: 'End Date'
+              },
+              value: ''
+            },
+            stage: {
+              elementType: 'select',
+              elementConfig: {
+                options: [
+                  {value: 'Select Stage', displayValue: 'Select Stage'},
+                  {value: 'Rough', displayValue: 'Rough'},
+                  {value: 'Topout', displayValue: 'Topout'},
+                  {value: 'Trim', displayValue: 'Trim'}
+                ]
+              },
+              value: ''
+            }
+          }      
+        })
         });
     }
+
+
     if (formData.startDate && formData.endDate){
       axios.get('/'+ formData.startDate + '/' + formData.endDate + '/' + formData.stage)
         .then((resp) => {
@@ -90,12 +187,52 @@ class stages extends Component {
         })
         .catch((err) => {
           console.log(err);
+        })
+        .then (() => {
+          this.setState({stageForm: {
+            address: {
+              elementType: 'input',
+              elementConfig: {
+                type: 'text',
+                placeholder: 'Street Address'
+              },
+              value: ''
+            },
+            startDate: {
+              elementType: 'input',
+              elementConfig: {
+                type: 'date',
+                placeholder: 'Start Date'
+              },
+              value: ''
+            },
+            endDate: {
+              elementType: 'input',
+              elementConfig: {
+                type: 'date',
+                placeholder: 'End Date'
+              },
+              value: ''
+            },
+            stage: {
+              elementType: 'select',
+              elementConfig: {
+                options: [
+                  {value: 'Select Stage', displayValue: 'Select Stage'},
+                  {value: 'Rough', displayValue: 'Rough'},
+                  {value: 'Topout', displayValue: 'Topout'},
+                  {value: 'Trim', displayValue: 'Trim'}
+                ]
+              },
+              value: ''
+            }
+          }      
+        })
         });
     }
   }
 
   displayResults = () => console.log(this.state.jobData);
-
 
   render() {
     const formElementArray = [];
@@ -105,10 +242,9 @@ class stages extends Component {
         config: this.state.stageForm[key]
       });
     }
-
     return (
       <div className="FlexStages">
-          <form onSubmit={this.submitFormHandler}>
+          <form className="FlexForm" onSubmit={this.submitFormHandler}>
             {formElementArray.map(formElement => (
               <Input 
                 key={formElement.id}
