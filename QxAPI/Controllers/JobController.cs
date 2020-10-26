@@ -24,6 +24,10 @@ namespace QxAPI.Controllers {
         [HttpGet("{address}")]
         public async Task<IEnumerable<Job>> GetJobsByAddress(string address) =>  await _context.Jobs.Where(j => j.Job_Site.Contains(address)).ToListAsync();
 
+        // GET: api/Jobs/1451 Halsey/10-01-2020/10-05-2020/Rough
+        [HttpGet("{address}/{startDate}/{endDate}/{stage}")]
+        public async Task<IEnumerable<Job>> GetJobsByAll(string address, DateTime startDate, DateTime endDate, string stage) => await _context.Jobs.Where(j => j.Job_Site.Contains(address) && j.Job_Date >= startDate && j.Job_Date <= endDate && j.Job_Stage == stage).ToListAsync();
+
     }
 
     
