@@ -1,12 +1,11 @@
 .Button {
     background-color: transparent;
-    border: none;
+    border: 1px solid black;
     color: white;
     outline: none;
     cursor: pointer;
     font: inherit;
-    padding: 10px;
-    margin: 10px;
+    margin: 1em;
     font-weight: bold;
 }
 
