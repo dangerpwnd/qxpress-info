@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import {CSVLink} from "react-csv";
 import axios from "../../axios-stage";
 import Input from "../../Components/UI/Input/Input";
 import Button from "../../Components/UI/Button/Button";
@@ -71,6 +72,8 @@ class stages extends Component {
       formData[formElementId] = this.state.stageForm[formElementId].value;
     }
 
+    // If address and dates are used, GET from endpoint
+
     if (formData.address && formData.startDate && formData.endDate){
       axios.get('/' + formData.address + '/'+ formData.startDate + '/' + formData.endDate + '/' + formData.stage)
         .then((resp) => {
@@ -124,6 +127,7 @@ class stages extends Component {
         });
     }
 
+    // If address is used, GET from endpoint
     if(formData.address){
       axios.get('/' + formData.address)
         .then((resp) => {
@@ -177,7 +181,7 @@ class stages extends Component {
         });
     }
 
-
+    // If dates are used , GET from endpoint
     if (formData.startDate && formData.endDate){
       axios.get('/'+ formData.startDate + '/' + formData.endDate + '/' + formData.stage)
         .then((resp) => {
@@ -232,7 +236,10 @@ class stages extends Component {
     }
   }
 
+
   displayResults = () => console.log(this.state.jobData);
+
+   
 
   render() {
     const formElementArray = [];
@@ -242,6 +249,7 @@ class stages extends Component {
         config: this.state.stageForm[key]
       });
     }
+    let saveResults = this.state.jobData;
     return (
       <div className="FlexStages">
           <form className="FlexForm" onSubmit={this.submitFormHandler}>
@@ -256,6 +264,7 @@ class stages extends Component {
             <Button type="submit" btnType="Success">Pull Data</Button>
           </form>
           <button onClick={this.displayResults}>See Results</button>
+          <CSVLink data={saveResults}>Download Results</CSVLink>
       </div>
     );
   }
