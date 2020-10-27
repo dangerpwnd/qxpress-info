@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import {CSVLink} from "react-csv";
+import shortid from "shortid";
 import axios from "../../axios-stage";
 import Input from "../../Components/UI/Input/Input";
 import Button from "../../Components/UI/Button/Button";
@@ -236,11 +237,6 @@ class stages extends Component {
     }
   }
 
-
-  displayResults = () => console.log(this.state.jobData);
-
-   
-
   render() {
     const formElementArray = [];
     for (let key in this.state.stageForm){
@@ -249,7 +245,15 @@ class stages extends Component {
         config: this.state.stageForm[key]
       });
     }
-    let saveResults = this.state.jobData;
+    let jobResults = this.state.jobData;
+    const headers = 
+    [
+      {field:"job_Date", label:"Date"},
+      {field: "job_Site", label:"Address"},
+      {field:"job_City", label: "City"},
+      {field:"job_Stage", label:"Stage"},
+    ];
+
     return (
       <div className="FlexStages">
           <form className="FlexForm" onSubmit={this.submitFormHandler}>
@@ -262,9 +266,29 @@ class stages extends Component {
                 changed={(event) => this.inputChangeHandler(event, formElement.id)} />
             ))}
             <Button type="submit" btnType="Success">Pull Data</Button>
+            <CSVLink data={jobResults} style={{backgroundColor:"transparent", color: "white", outline: "none", cursor: "pointer", font: "inherit", fontWeight: "bold"}}>Download Results</CSVLink>
           </form>
-          <button onClick={this.displayResults}>See Results</button>
-          <CSVLink data={saveResults}>Download Results</CSVLink>
+          <div className="FlexForm">
+            <table className="ResultsTable">
+             <thead>
+              <tr className="ResultsHeader">
+                {headers.map((header, i) => 
+                  <th key={i}>{header.label}</th>
+                )}
+               </tr>
+              </thead>
+              <tbody>
+                {jobResults.map((job, i) => (
+                  <tr className="ResultsRow" key={i}>
+                  <td key={shortid.generate()}>{job.job_Date}</td>
+                  <td key={shortid.generate()}>{job.job_Site}</td>
+                  <td key={shortid.generate()}>{job.job_City}</td>
+                  <td key={shortid.generate()}>{job.job_Stage}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
       </div>
     );
   }
