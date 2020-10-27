@@ -10,7 +10,8 @@
     "react": "^16.13.1",
     "react-csv": "^2.0.3",
     "react-dom": "^16.13.1",
-    "react-scripts": "^3.4.4"
+    "react-scripts": "^3.4.4",
+    "shortid": "^2.2.16"
   },
   "scripts": {
     "start": "react-scripts start",
