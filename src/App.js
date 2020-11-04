@@ -1,18 +1,17 @@
-import React, { Component } from "react";
+import React from "react";
 import "./App.css";
-import Stages from "./Containers/Stages/Stages";
+import QxForm from "./Components/QxSearch/QxForm/QxForm";
+import QxList from "./Components/QxSearch/QxList/QxList";
 
 
-class App extends Component {
-
-  render() {
-    return (
-      <div className="App">
-        <h1>Qxpress Job Reports</h1>
-        <Stages />
-      </div>
-    );
-  }
-}
+const App = props => {
+  return (
+    <>
+      <h1>Qxpress Job Reports</h1>
+      <QxForm />
+      <QxList />
+    </>
+  );
+};
 
 export default App;
