@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import Input from "../../UI/Input/Input";
+import axios from "../../../axios-stage";
 
 
 const QxForm = (props) => {
@@ -44,53 +45,53 @@ const QxForm = (props) => {
     });
     const [jobData, setJobData] = useState([]);
 
-    inputChangeHandler = (event, inputId) => {
-        const updatedForm = {qxForm};
-        const updatedFormElement = {updatedForm[inputId]};
+    const inputChangeHandler = (event, inputId) => {
+        const updatedForm = {...qxForm};
+        const updatedFormElement = {...updatedForm[inputId]};
 
         updatedFormElement.value = event.target.value;
         updatedForm[inputId] = updatedFormElement;
         setQxForm({updatedForm});
     };
 
-    submitFormHandler = (event) => {
+    const submitFormHandler = (event) => {
         event.preventDefault();
         let formData = {};
-        for (let formElementId in this.state.stageForm){
-          formData[formElementId] = this.state.stageForm[formElementId].value;
+        for (let formElementId in qxForm){
+          formData[formElementId] = qxForm[formElementId].value;
         }
-        if(formData.startDate == ''){
+        if(formData.startDate === ''){
           formData.startDate = "2000-01-01"
         }
-        if(formData.endDate == ''){
+        if(formData.endDate === ''){
           formData.endDate = "2050-01-01"
         }
         
-        if(formData.address == ''){
+        if(formData.address === ''){
           axios.get('/'+ formData.startDate + '/' + formData.endDate + '/' + formData.stage)
             .then((resp) => {
               resp.data.length !== 0 ? 
-              this.setState({jobData : resp.data}): 
+              setJobData({jobData : resp.data}): 
               alert("No data available");
             })
             .catch((err) => {
               console.log(err);
             })
             .then (() => {
-              this.setState( {stageForm : this.baseState});
+              setJobData([]);
             });
         } else {
           axios.get('/' + formData.address + '/'+ formData.startDate + '/' + formData.endDate + '/' + formData.stage)
             .then((resp) => {
               resp.data.length !== 0 ? 
-              this.setState({jobData : resp.data}): 
+              setJobData({jobData : resp.data}): 
               alert("No data available");
             })
             .catch((err) => {
               console.log(err);
             })
             .then (() => {
-              this.setState({stageForm: {}})
+              setJobData([]);
             });
         }
       };
