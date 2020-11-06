@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Authentication.Certificate;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.DependencyInjection;
@@ -21,6 +22,7 @@ namespace QxAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<JobContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("connectionstring")).EnableSensitiveDataLogging());
+            services.AddAuthentication(CertificateAuthenticationDefaults.AuthenticationScheme).AddCertificate();
             services.AddControllers();
             services.AddCors();
         }
