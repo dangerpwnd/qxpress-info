@@ -1,0 +1,31 @@
+.FlexList {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    margin-bottom: 1em;
+}
+
+.ResultsTable {
+    border: 3px solid green;
+    box-shadow: 0 2 2;
+}
+
+.ResultsHeader {
+    background-color: green;
+    color: white;
+}
+
+.ResultsRow:nth-child(even) {
+    background: #16697a;
+    color: #EDE7E3;
+}
+
+.ResultsRow:nth-child(odd) {
+  background: #489FB5;
+  color: #EDE7E3;
+}
+
+td, th {
+  padding: 1em;
+}
