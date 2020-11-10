@@ -1,120 +1,119 @@
-import React, {useState} from 'react';
-import Input from "../../UI/Input/Input";
-import axios from "../../../axios-stage";
+import React, { useState } from "react";
+import { CSVLink } from "react-csv";
 
+import axios from "../../../axios-stage";
+import QxList from "../QxList/QxList";
+import './QxForm.css';
 
 const QxForm = (props) => {
+  // States
 
-    const [qxForm, setQxForm] = useState({
-        address: {
-            elementType: 'input',
-            elementConfig: {
-              type: 'text',
-              placeholder: 'Street Address'
-            },
-            value: ''
-          },
-          startDate: {
-            elementType: 'input',
-            elementConfig: {
-              type: 'date',
-              placeholder: 'Start Date'
-            },
-            value: ''
-          },
-          endDate: {
-            elementType: 'input',
-            elementConfig: {
-              type: 'date',
-              placeholder: 'End Date'
-            },
-            value: ''
-          },
-          stage: {
-            elementType: 'select',
-            elementConfig: {
-              options: [
-                {value: 'Select Stage', displayValue: 'Select Stage'},
-                {value: 'Rough', displayValue: 'Rough'},
-                {value: 'Topout', displayValue: 'Topout'},
-                {value: 'Trim', displayValue: 'Trim'}
-              ]
-            },
-            value: ''
-          }
-    });
-    const [jobData, setJobData] = useState([]);
+  const [qxForm, setQxForm] = useState({
+    address: "",
+    startDate: "2010-01-01",
+    endDate: "2025-01-01",
+    stage: "Rough",
+  });
 
-    const inputChangeHandler = (event, inputId) => {
-        const updatedForm = {...qxForm};
-        const updatedFormElement = {...updatedForm[inputId]};
+  const [jobData, setJobData] = useState([]);
 
-        updatedFormElement.value = event.target.value;
-        updatedForm[inputId] = updatedFormElement;
-        setQxForm({updatedForm});
-    };
+  // Handlers
+  const inputChangeHandler = (e) => {
+    setQxForm({ ...qxForm, [e.target.name]: e.target.value });
+  };
 
-    const submitFormHandler = (event) => {
-        event.preventDefault();
-        let formData = {};
-        for (let formElementId in qxForm){
-          formData[formElementId] = qxForm[formElementId].value;
-        }
-        if(formData.startDate === ''){
-          formData.startDate = "2000-01-01"
-        }
-        if(formData.endDate === ''){
-          formData.endDate = "2050-01-01"
-        }
-        
-        if(formData.address === ''){
-          axios.get('/'+ formData.startDate + '/' + formData.endDate + '/' + formData.stage)
-            .then((resp) => {
-              resp.data.length !== 0 ? 
-              setJobData({jobData : resp.data}): 
-              alert("No data available");
-            })
-            .catch((err) => {
-              console.log(err);
-            })
-            .then (() => {
-              setJobData([]);
-            });
-        } else {
-          axios.get('/' + formData.address + '/'+ formData.startDate + '/' + formData.endDate + '/' + formData.stage)
-            .then((resp) => {
-              resp.data.length !== 0 ? 
-              setJobData({jobData : resp.data}): 
-              alert("No data available");
-            })
-            .catch((err) => {
-              console.log(err);
-            })
-            .then (() => {
-              setJobData([]);
-            });
-        }
-      };
+  const submitFormHandler = (event) => {
+    event.preventDefault();
+    let formData = { ...qxForm };
 
-    return (
-        <>
-            <form onSubmit={submitFormHandler}>
-                <label>Street Address</label>
-                <input type="text" changed={inputChangeHandler}></input>
-                <label>Start Date</label>
-                <input type="date" changed={inputChangeHandler}></input>
-                <label>End Date</label>
-                <input type="date" changed={inputChangeHandler}></input>
-                <label>Stage</label>
-                <select changed={inputChangeHandler}>
-                    <option value="Rough">Rough</option>
-                    <option value="Topout">Topout</option>
-                    <option value="Trim">Trim</option>
-                </select>
-                <button type="submit">Pull Data</button>
-            </form>
-        </>
-    );
-}
+    if (formData.address === "") {
+      axios
+        .get(
+          "/" +
+            formData.startDate +
+            "/" +
+            formData.endDate +
+            "/" +
+            formData.stage
+        )
+        .then((resp) => {
+          resp.data.length !== 0
+            ? setJobData([resp.data])
+            : alert("No data available");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      axios
+        .get(
+          "/" +
+            formData.address +
+            "/" +
+            formData.startDate +
+            "/" +
+            formData.endDate +
+            "/" +
+            formData.stage
+        )
+        .then((resp) => {
+          resp.data.length !== 0
+            ? setJobData(resp.data)
+            : alert("No data available");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  };
+
+  return (
+    <>
+      <form className="GridForm" onSubmit={submitFormHandler}>
+        <label>Street Address</label>
+        <input
+          type="text"
+          name="address"
+          value={qxForm.address}
+          onChange={inputChangeHandler}
+        ></input>
+        <label>Start Date</label>
+        <input
+          type="date"
+          name="startDate"
+          value={qxForm.startDate}
+          onChange={inputChangeHandler}
+        ></input>
+        <label>End Date</label>
+        <input
+          type="date"
+          name="endDate"
+          value={qxForm.endDate}
+          onChange={inputChangeHandler}
+        ></input>
+        <label>Stage</label>
+        <select name="stage" onChange={inputChangeHandler}>
+          <option value="Rough">Rough</option>
+          <option value="Topout">Topout</option>
+          <option value="Trim">Trim</option>
+        </select>
+        <button type="submit">Pull Data</button>
+        <CSVLink
+          data={jobData}
+          style={{
+            color: "white",
+            outline: "none",
+            cursor: "pointer",
+            font: "inherit",
+            fontWeight: "bold",
+          }}
+        >
+          Download Results
+        </CSVLink>
+      </form>
+      <QxList formData={jobData} />
+    </>
+  );
+};
 
 export default QxForm;
