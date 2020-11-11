@@ -38,7 +38,7 @@ const QxForm = (props) => {
         )
         .then((resp) => {
           resp.data.length !== 0
-            ? setJobData([resp.data])
+            ? setJobData(resp.data)
             : alert("No data available");
         })
         .catch((err) => {
