@@ -1,8 +1,11 @@
 .GridForm {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    justify-self: center;
+    align-self: center;
     row-gap: 1em;
-    width: 80%;
+    width: 65%;
     margin: 1em auto;
+    padding: 1em;
     border: 1px solid black;
 }
