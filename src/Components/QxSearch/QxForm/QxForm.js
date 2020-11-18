@@ -65,6 +65,12 @@ const QxForm = (props) => {
           console.log(err);
         });
     }
+    setQxForm({
+      address: "",
+      startDate: "",
+      endDate: "",
+      stage: "",
+    })
   };
 
   return (
