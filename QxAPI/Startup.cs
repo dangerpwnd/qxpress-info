@@ -44,7 +44,7 @@ namespace QxAPI
             app.UseCors(
                 options => options.WithOrigins("http://localhost:3000").AllowAnyMethod().AllowAnyHeader()
             );
-            app.UseHttpsRedirection();
+            // app.UseHttpsRedirection();
             app.UseAuthorization();
             app.UseEndpoints( endpoints => {
                 endpoints.MapControllers();
