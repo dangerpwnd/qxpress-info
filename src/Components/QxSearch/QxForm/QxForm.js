@@ -11,8 +11,8 @@ const QxForm = (props) => {
   const [qxForm, setQxForm] = useState({
     address: "",
     startDate: "2010-01-01",
-    endDate: "2025-01-01",
-    stage: "Rough",
+    endDate: "2010-12-01",
+    stage: "Select Stage",
   });
 
   const [jobData, setJobData] = useState([]);
@@ -99,6 +99,7 @@ const QxForm = (props) => {
         ></input>
         <label>Stage</label>
         <select name="stage" onChange={inputChangeHandler}>
+          <option value="Select">Select Stage</option>
           <option value="Rough">Rough</option>
           <option value="Topout">Topout</option>
           <option value="Trim">Trim</option>
