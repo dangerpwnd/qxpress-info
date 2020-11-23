@@ -1,26 +1,35 @@
 import React, {Component} from 'react';
 
 class ErrorBoundary extends Component {
-    constructor(props){
-        super(props);
-        this.state = {hasError: false};
-    }
+
+    state = {
+        error: '',
+        errorInfo: '',
+        hasError: false,
+    };
 
     static getDerivedStateFromError(error){
         // Update state so next render uses fallback UI
-        return {hasError:true};
+        return {hasError:true, error};
     }
 
-    render(error){
-        if(this.state.hasError){
+    componentDidCatch(error, errorInfo){
+        console.log({error, errorInfo});
+        this.setState({errorInfo});
+    }
+
+    render(){
+        const ErrorComponent = () => {
             return(
                 <div role="alert">
-                    <p>Scream at Eric. He broke it.</p>
-                    <pre>{error}</pre>
+                    <p>Scream at Eric. He broke it. Or you did. Only the logs will tell.</p>
                 </div>
             ) 
         }
-        return this.props.children;
+        const { hasError} = this.state;
+        const { children } = this.props;
+
+        return hasError ? <ErrorComponent /> : children;
     }
 }
 
