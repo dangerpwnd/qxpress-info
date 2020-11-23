@@ -5,6 +5,7 @@ import axios from "../../../axios-stage";
 import QxList from "../QxList/QxList";
 import './QxForm.css';
 
+
 const QxForm = (props) => {
   // States
 
@@ -16,6 +17,7 @@ const QxForm = (props) => {
   });
 
   const [jobData, setJobData] = useState([]);
+
 
   // Handlers
   const inputChangeHandler = (e) => {
@@ -42,7 +44,7 @@ const QxForm = (props) => {
             : alert("No data available");
         })
         .catch((err) => {
-          console.log(err);
+          alert(err);
         });
     } else {
       axios
@@ -62,7 +64,7 @@ const QxForm = (props) => {
             : alert("No data available");
         })
         .catch((err) => {
-          console.log(err);
+          alert(err);
         });
     }
     setQxForm({
