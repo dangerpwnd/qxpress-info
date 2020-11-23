@@ -4,6 +4,12 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
+if (process.env.NODE_ENV === 'development') {
+  import('react-error-overlay').then(m => {
+    m.stopReportingRuntimeErrors();
+  });
+}
+
 ReactDOM.render(
   <React.StrictMode>
     <App />
