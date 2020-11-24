@@ -11,6 +11,7 @@
     "react-csv": "^2.0.3",
     "react-dom": "^16.13.1",
     "react-error-overlay": "^6.0.8",
+    "react-paginate": "^6.5.0",
     "react-scripts": "^3.4.4",
     "shortid": "^2.2.16"
   },
