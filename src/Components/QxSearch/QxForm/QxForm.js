@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { CSVLink } from "react-csv";
 
 import axios from "../../../axios-stage";
 import QxList from "../QxList/QxList";
 import './QxForm.css';
+import image from '../../../Assets/logo.png';
 
 
 const QxForm = (props) => {
@@ -18,7 +19,13 @@ const QxForm = (props) => {
 
   const [jobData, setJobData] = useState([]);
   const [hasSubmit, setSubmit] = useState(false);
+  const [isLoading, setLoading] = useState(false);
 
+  useEffect(() => {
+    if(jobData.length > 0){
+      setLoading(false)
+    }
+  }, [jobData])
   // Handlers
   const inputChangeHandler = (e) => {
     setQxForm({ ...qxForm, [e.target.name]: e.target.value });
@@ -28,7 +35,7 @@ const QxForm = (props) => {
   const submitFormHandler = (event) => {
     event.preventDefault();
     let formData = { ...qxForm };
-
+    setLoading(true);
     if (formData.address === "") {
       axios
         .get(
@@ -122,7 +129,7 @@ const QxForm = (props) => {
           Download Results
         </CSVLink>
       </form>
-      <QxList formData={jobData} hasSubmit={hasSubmit} />
+      {isLoading ? <img className="CPTFade" src={image} alt="Cathedral Logo" /> : <QxList formData={jobData} hasSubmit={hasSubmit} />}
     </>
   );
 };
