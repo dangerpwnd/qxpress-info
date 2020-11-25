@@ -17,11 +17,12 @@ const QxForm = (props) => {
   });
 
   const [jobData, setJobData] = useState([]);
-
+  const [hasSubmit, setSubmit] = useState(false);
 
   // Handlers
   const inputChangeHandler = (e) => {
     setQxForm({ ...qxForm, [e.target.name]: e.target.value });
+    setSubmit(false);
   };
 
   const submitFormHandler = (event) => {
@@ -73,6 +74,7 @@ const QxForm = (props) => {
       endDate: "",
       stage: "Select",
     })
+    setSubmit(true);
   };
 
   return (
@@ -120,7 +122,7 @@ const QxForm = (props) => {
           Download Results
         </CSVLink>
       </form>
-      <QxList formData={jobData} />
+      <QxList formData={jobData} hasSubmit={hasSubmit} />
     </>
   );
 };
