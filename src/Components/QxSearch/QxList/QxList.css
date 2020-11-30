@@ -14,23 +14,22 @@
 }
 
 .ResultsTable {
-    border: 3px solid green;
+    border: 3px solid white;
     box-shadow: 0 2 2;
 }
 
 .ResultsHeader {
-    background-color: green;
     color: white;
 }
 
 .ResultsRow:nth-child(even) {
-    background: #16697a;
-    color: #EDE7E3;
+    background: white;
+    color: #491d88;
 }
 
 .ResultsRow:nth-child(odd) {
-  background: #489FB5;
-  color: #EDE7E3;
+  background: white;
+  color: #491d88;
 }
 
 td, th {
@@ -44,23 +43,23 @@ td, th {
 }
 
 .pagination > .active > a{
-  background-color: green ;
-  border-color: green ;
-  color: #fff;
+  background-color:  #fff ;
+  border-color:  #fff ;
+  color: #491d88;
 }
 .pagination > li > a{
-  border: 1px solid green ;
+  border: 1px solid  #fff ;
   padding: 5px 10px;
   outline: none;
   cursor: pointer;
 }
 .pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus{
-  background-color:green ;
-  border-color: green;
+  background-color: #fff ;
+  border-color:  #fff;
   outline: none ;
 }
 .pagination > li > a, .pagination > li > span{
-  color: green
+  color:  #fff
 }
 .pagination > li:first-child > a, .pagination > li:first-child > span, .pagination > li:last-child > a, .pagination > li:last-child > span{
   border-radius: unset
