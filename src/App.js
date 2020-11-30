@@ -6,7 +6,7 @@ import ErrorBoundary from "./ErrorBoundary.js";
 const App = props => {
 
   return (
-    <div>
+    <div role="main">
       <h1>Qxpress Job Reports</h1>
       <ErrorBoundary>
         <QxForm />

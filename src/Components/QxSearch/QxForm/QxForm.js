@@ -86,36 +86,44 @@ const QxForm = (props) => {
 
   return (
     <>
-      <form className="GridForm" onSubmit={submitFormHandler}>
-        <label>Street Address</label>
+      <form className="GridForm" onSubmit={submitFormHandler} tabindex="0">
+        <label id="address" tabindex="-1">Street Address</label>
         <input
           type="text"
           name="address"
           value={qxForm.address}
           onChange={inputChangeHandler}
+          aria-required="false"
+          tabindex="-1"
         ></input>
-        <label>Start Date</label>
+        <label id="start_date" tabindex="-1">Start Date</label>
         <input
           type="date"
           name="startDate"
           value={qxForm.startDate}
           onChange={inputChangeHandler}
+          aria-labelledby="start_date"
+          aria-required="true"
+          tabindex="-1"
         ></input>
-        <label>End Date</label>
+        <label id="end_date" tabindex="-1">End Date</label>
         <input
           type="date"
           name="endDate"
           value={qxForm.endDate}
           onChange={inputChangeHandler}
+          aria-labelledby="end_date"
+          aria-required="true"
+          tabindex="-1"
         ></input>
-        <label>Stage</label>
-        <select name="stage" onChange={inputChangeHandler} value={qxForm.stage}>
-          <option value="Select">Select Stage</option>
-          <option value="Rough">Rough</option>
-          <option value="Topout">Topout</option>
-          <option value="Trim">Trim</option>
+        <label id="stage" tabindex="-1">Stage</label>
+        <select name="stage" onChange={inputChangeHandler} value={qxForm.stage} aria-required="true" tabindex="-1">
+          <option value="Select" aria-labelledby="stage" tabindex="-1">Select Stage</option>
+          <option value="Rough" aria-labelledby="stage" tabindex="-1">Rough</option>
+          <option value="Topout" aria-labelledby="stage" tabindex="-1">Topout</option>
+          <option value="Trim" aria-labelledby="stage" tabindex="-1">Trim</option>
         </select>
-        <button type="submit">Pull Data</button>
+        <button type="submit" tabindex="-1">Pull Data</button>
         <CSVLink
           data={jobData}
           style={{
@@ -125,6 +133,7 @@ const QxForm = (props) => {
             font: "inherit",
             fontWeight: "bold",
           }}
+          tabindex="-1"
         >
           Download Results
         </CSVLink>
