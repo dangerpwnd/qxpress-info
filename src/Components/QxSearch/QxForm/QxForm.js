@@ -3,9 +3,8 @@ import { CSVLink } from "react-csv";
 
 import axios from "../../../axios-stage";
 import QxList from "../QxList/QxList";
-import './QxForm.css';
-import image from '../../../Assets/logo.png';
-
+import "./QxForm.css";
+import image from "../../../Assets/logo.png";
 
 const QxForm = (props) => {
   // States
@@ -22,10 +21,10 @@ const QxForm = (props) => {
   const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
-    if(jobData.length > 0){
-      setLoading(false)
+    if (jobData.length > 0) {
+      setLoading(false);
     }
-  }, [jobData])
+  }, [jobData]);
   // Handlers
   const inputChangeHandler = (e) => {
     setQxForm({ ...qxForm, [e.target.name]: e.target.value });
@@ -47,9 +46,7 @@ const QxForm = (props) => {
             formData.stage
         )
         .then((resp) => {
-          resp.data.length !== 0
-            ? setJobData(resp.data)
-            : setLoading(false);
+          resp.data.length !== 0 ? setJobData(resp.data) : setLoading(false);
         })
         .catch((err) => {
           alert(err);
@@ -68,9 +65,7 @@ const QxForm = (props) => {
             formData.stage
         )
         .then((resp) => {
-          resp.data.length !== 0
-            ? setJobData(resp.data)
-            : setLoading(false);
+          resp.data.length !== 0 ? setJobData(resp.data) : setLoading(false);
         })
         .catch((err) => {
           alert(err);
@@ -82,14 +77,14 @@ const QxForm = (props) => {
       startDate: "",
       endDate: "",
       stage: "Select",
-    })
+    });
     setSubmit(true);
   };
 
   return (
     <>
       <form className="GridForm" onSubmit={submitFormHandler}>
-        <label id="addrlabel" >Street Address</label>
+        <label id="addrlabel">Street Address</label>
         <input
           id="address"
           type="text"
@@ -98,9 +93,8 @@ const QxForm = (props) => {
           onChange={inputChangeHandler}
           aria-required="false"
           aria-labelledby="addrlabel"
-          
         ></input>
-        <label id="startlabel" >Start Date</label>
+        <label id="startlabel">Start Date</label>
         <input
           id="start_date"
           type="date"
@@ -109,9 +103,8 @@ const QxForm = (props) => {
           onChange={inputChangeHandler}
           aria-labelledby="startlabel"
           aria-required="true"
-          
         ></input>
-        <label id="endlabel" >End Date</label>
+        <label id="endlabel">End Date</label>
         <input
           id="end_date"
           type="date"
@@ -120,16 +113,30 @@ const QxForm = (props) => {
           onChange={inputChangeHandler}
           aria-labelledby="endlabel"
           aria-required="true"
-          
         ></input>
-        <label id="stagelabel" >Stage</label>
-        <select id="stage" name="stage" onChange={inputChangeHandler} value={qxForm.stage} aria-labelledby="stagelabel" aria-required="true" >
-          <option value="Select" aria-labelledby="stage" >Select Stage</option>
-          <option value="Rough" aria-labelledby="stage" >Rough</option>
-          <option value="Topout" aria-labelledby="stage" >Topout</option>
-          <option value="Trim" aria-labelledby="stage" >Trim</option>
+        <label id="stagelabel">Stage</label>
+        <select
+          id="stage"
+          name="stage"
+          onChange={inputChangeHandler}
+          value={qxForm.stage}
+          aria-labelledby="stagelabel"
+          aria-required="true"
+        >
+          <option value="Select" aria-labelledby="stage">
+            Select Stage
+          </option>
+          <option value="Rough" aria-labelledby="stage">
+            Rough
+          </option>
+          <option value="Topout" aria-labelledby="stage">
+            Topout
+          </option>
+          <option value="Trim" aria-labelledby="stage">
+            Trim
+          </option>
         </select>
-        <button type="submit" >Pull Data</button>
+        <button type="submit">Pull Data</button>
         <CSVLink
           data={jobData}
           style={{
@@ -143,7 +150,11 @@ const QxForm = (props) => {
           Download Results
         </CSVLink>
       </form>
-      {isLoading ? <img className="CPTFade" src={image} alt="Cathedral Logo" /> : <QxList formData={jobData} hasSubmit={hasSubmit} />}
+      {isLoading ? (
+        <img className="CPTFade" src={image} alt="Cathedral Logo" />
+      ) : (
+        <QxList formData={jobData} hasSubmit={hasSubmit} />
+      )}
     </>
   );
 };
