@@ -49,10 +49,11 @@ const QxForm = (props) => {
         .then((resp) => {
           resp.data.length !== 0
             ? setJobData(resp.data)
-            : alert("No data available");
+            : setLoading(false);
         })
         .catch((err) => {
           alert(err);
+          setLoading(false);
         });
     } else {
       axios
@@ -69,10 +70,11 @@ const QxForm = (props) => {
         .then((resp) => {
           resp.data.length !== 0
             ? setJobData(resp.data)
-            : alert("No data available");
+            : setLoading(false);
         })
         .catch((err) => {
           alert(err);
+          setLoading(false);
         });
     }
     setQxForm({
@@ -86,44 +88,48 @@ const QxForm = (props) => {
 
   return (
     <>
-      <form className="GridForm" onSubmit={submitFormHandler} tabindex="0">
-        <label id="address" tabindex="-1">Street Address</label>
+      <form className="GridForm" onSubmit={submitFormHandler}>
+        <label id="addrlabel" >Street Address</label>
         <input
+          id="address"
           type="text"
           name="address"
           value={qxForm.address}
           onChange={inputChangeHandler}
           aria-required="false"
-          tabindex="-1"
+          aria-labelledby="addrlabel"
+          
         ></input>
-        <label id="start_date" tabindex="-1">Start Date</label>
+        <label id="startlabel" >Start Date</label>
         <input
+          id="start_date"
           type="date"
           name="startDate"
           value={qxForm.startDate}
           onChange={inputChangeHandler}
-          aria-labelledby="start_date"
+          aria-labelledby="startlabel"
           aria-required="true"
-          tabindex="-1"
+          
         ></input>
-        <label id="end_date" tabindex="-1">End Date</label>
+        <label id="endlabel" >End Date</label>
         <input
+          id="end_date"
           type="date"
           name="endDate"
           value={qxForm.endDate}
           onChange={inputChangeHandler}
-          aria-labelledby="end_date"
+          aria-labelledby="endlabel"
           aria-required="true"
-          tabindex="-1"
+          
         ></input>
-        <label id="stage" tabindex="-1">Stage</label>
-        <select name="stage" onChange={inputChangeHandler} value={qxForm.stage} aria-required="true" tabindex="-1">
-          <option value="Select" aria-labelledby="stage" tabindex="-1">Select Stage</option>
-          <option value="Rough" aria-labelledby="stage" tabindex="-1">Rough</option>
-          <option value="Topout" aria-labelledby="stage" tabindex="-1">Topout</option>
-          <option value="Trim" aria-labelledby="stage" tabindex="-1">Trim</option>
+        <label id="stagelabel" >Stage</label>
+        <select id="stage" name="stage" onChange={inputChangeHandler} value={qxForm.stage} aria-labelledby="stagelabel" aria-required="true" >
+          <option value="Select" aria-labelledby="stage" >Select Stage</option>
+          <option value="Rough" aria-labelledby="stage" >Rough</option>
+          <option value="Topout" aria-labelledby="stage" >Topout</option>
+          <option value="Trim" aria-labelledby="stage" >Trim</option>
         </select>
-        <button type="submit" tabindex="-1">Pull Data</button>
+        <button type="submit" >Pull Data</button>
         <CSVLink
           data={jobData}
           style={{
@@ -133,7 +139,6 @@ const QxForm = (props) => {
             font: "inherit",
             fontWeight: "bold",
           }}
-          tabindex="-1"
         >
           Download Results
         </CSVLink>
