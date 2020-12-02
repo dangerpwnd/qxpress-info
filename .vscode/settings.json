@@ -1,5 +1,6 @@
 {
     "cSpell.ignoreWords": [
+        "addrlabel",
         "catalog",
         "catalog cptxsql",
         "connectionstring",
@@ -7,6 +8,7 @@
         "cptxsql",
         "database",
         "enddate",
+        "endlabel",
         "hsts",
         "id",
         "pass",
@@ -16,7 +18,9 @@
         "qxpress",
         "server",
         "server cpt qx qxenterprise database cptxsql user id test password pass",
+        "stagelabel",
         "startdate",
+        "startlabel",
         "test",
         "topout",
         "use",
