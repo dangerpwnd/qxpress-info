@@ -46,7 +46,9 @@ const QxList = (props) => {
   // Table headers
   const headers = [
     { field: "job_Date", label: "Date" },
-    { field: "job_Site", label: "Address" },
+    { field: "Builder", label: "Builder" },
+    { field: "Community", label: "Community" },
+    { field: "Address", label: "Address"},
     { field: "job_City", label: "City" },
     { field: "job_Stage", label: "Stage" },
   ];
@@ -64,10 +66,9 @@ const QxList = (props) => {
         <tbody>
           {sliceData.map((job) => (
             <tr className="ResultsRow FlexTable" key={shortid.generate()}>
-              <td key={shortid.generate()}>{job.job_Date}</td>
-              <td key={shortid.generate()}>{job.job_Site}</td>
-              <td key={shortid.generate()}>{job.job_City}</td>
-              <td key={shortid.generate()}>{job.job_Stage}</td>
+              {headers.map((header) => (
+              <td key={shortid.generate()}>{job[header.field]}</td>
+              ))}
             </tr>
           ))}
         </tbody>
