@@ -46,7 +46,7 @@ const QxForm = (props) => {
             formData.stage
         )
         .then((resp) => {
-          resp.data.length !== 0 ? setJobData(resp.data) : setLoading(false);
+          resp.data.length !== 0 ? handleSuccess(resp.data) : setLoading(false);
         })
         .catch((err) => {
           alert(err);
@@ -65,7 +65,7 @@ const QxForm = (props) => {
             formData.stage
         )
         .then((resp) => {
-          resp.data.length !== 0 ? setJobData(resp.data) : setLoading(false);
+          resp.data.length !== 0 ? handleSuccess(resp.data) : setLoading(false);
         })
         .catch((err) => {
           alert(err);
@@ -81,58 +81,65 @@ const QxForm = (props) => {
     setSubmit(true);
   };
 
+  const handleSuccess = (resp) => {
+    resp.forEach(x => {
+      let newprops = x.job_Site.split(/[:,-]+/);
+      x.Builder = newprops[0];
+      x.Address = newprops[1];
+      x.Community = newprops[2];
+    });
+    setJobData(resp);
+  }
+
+
   return (
     <>
       <form className="GridForm" onSubmit={submitFormHandler}>
         <label id="addrlabel">Street Address</label>
         <input
-          id="address"
           type="text"
           name="address"
           value={qxForm.address}
           onChange={inputChangeHandler}
           aria-required="false"
           aria-labelledby="addrlabel"
-        ></input>
+        />
         <label id="startlabel">Start Date</label>
         <input
-          id="start_date"
           type="date"
           name="startDate"
           value={qxForm.startDate}
           onChange={inputChangeHandler}
           aria-labelledby="startlabel"
           aria-required="true"
-        ></input>
+        />
         <label id="endlabel">End Date</label>
         <input
-          id="end_date"
           type="date"
           name="endDate"
           value={qxForm.endDate}
           onChange={inputChangeHandler}
           aria-labelledby="endlabel"
           aria-required="true"
-        ></input>
+        />
         <label id="stagelabel">Stage</label>
         <select
-          id="stage"
           name="stage"
           onChange={inputChangeHandler}
           value={qxForm.stage}
           aria-labelledby="stagelabel"
           aria-required="true"
         >
-          <option value="Select" aria-labelledby="stage">
+          <option value="Select" aria-labelledby="stagelabel">
             Select Stage
           </option>
-          <option value="Rough" aria-labelledby="stage">
+          <option value="Rough" aria-labelledby="stagelabel">
             Rough
           </option>
-          <option value="Topout" aria-labelledby="stage">
+          <option value="Topout" aria-labelledby="stagelabel">
             Topout
           </option>
-          <option value="Trim" aria-labelledby="stage">
+          <option value="Trim" aria-labelledby="stagelabel">
             Trim
           </option>
         </select>
@@ -141,7 +148,6 @@ const QxForm = (props) => {
           data={jobData}
           style={{
             color: "white",
-            outline: "none",
             cursor: "pointer",
             font: "inherit",
             fontWeight: "bold",
