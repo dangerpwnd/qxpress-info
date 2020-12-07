@@ -4,10 +4,10 @@
     justify-self: center;
     align-self: center;
     row-gap: 1em;
-    width: 30%;
     margin: 1em auto;
     padding: 1em;
-    border: 1px solid #fff;
+    border: 3px solid #fff;
+    width: 30%;
 }
 
 .GridForm:focus-within{
@@ -20,6 +20,10 @@ input[type="text"]:focus,
 select:focus {
   border-color: #2491eb;
   outline: 1px solid #2491eb;
+}
+
+label {
+    font-weight: bold;
 }
 
 .CPTFade{
@@ -44,5 +48,14 @@ select:focus {
         opacity: 0;
         transform: scale(1.0);
         -webkit-transform: scale(1.0);
+    }
+}
+
+@media (max-width: 1180px) {
+    .GridForm {
+        margin: 0 auto;
+        width: 75%;
+        padding: 0.5em;
+        margin-bottom: 1em;
     }
 }
