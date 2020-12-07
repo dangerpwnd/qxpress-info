@@ -29,7 +29,6 @@ const QxForm = props => {
 
   const inputChangeHandler = (e) => {
     setQxForm({ ...qxForm, [e.target.name]: e.target.value });
-    setSubmit(false);
   };
 
   const submitFormHandler = (event) => {
@@ -83,7 +82,7 @@ const QxForm = props => {
 
   const handleSplitCol = (resp) => {
     resp.forEach(col => {
-      if(col.job_Site.includes("LGI") || col.job_Site.includes("K. Hov")){
+      if(col.job_Site.includes("LGI") || col.job_Site.includes("K. Hov") || col.job_Site.includes("Dallas")){
         let splitBuilder = col.job_Site.split(/[:]+/);
         let splitAddr = splitBuilder[1].split(/[-]+/);
         col.Builder = splitBuilder[0];
