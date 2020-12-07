@@ -107,7 +107,7 @@ const QxTable = (props) => {
           {page.map((row) => {
             prepareRow(row);
             return (
-              <tr {...row.getRowProps()} className="ResultsHeader FlexTable">
+              <tr {...row.getRowProps()} className="ResultsRow FlexTable">
                 {
                   // Loop over the rows cells
                   row.cells.map((cell) => {

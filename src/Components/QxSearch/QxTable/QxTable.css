@@ -8,29 +8,26 @@
   .FlexTable {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-      margin-bottom: 1em;
       width: 100%;
   }
   
   .ResultsTable {
       border: 3px solid white;
-      box-shadow: 0 2 2;
+      margin-bottom: 1em;
   }
   
   .ResultsHeader {
       color: white;
+      border-bottom: 3px solid white;
   }
   
   .ResultsRow:nth-child(even) {
-      background: white;
-      color: #491d88;
+      background: #7E42D4;
+      color: white;
   }
   
   .ResultsRow:nth-child(odd) {
-    background: white;
-    color: #491d88;
+    background: #491D88;
+    color: white;
   }
   
-  td, th {
-    padding: 1em;
-  }
