@@ -2,22 +2,21 @@ import React, { useState, useEffect } from "react";
 import { CSVLink } from "react-csv";
 
 import axios from "../../../axios-stage";
-import QxList from "../QxList/QxList";
+import QxTable from "../QxTable/QxTable";
 import "./QxForm.css";
 import image from "../../../Assets/logo.png";
 
-const QxForm = (props) => {
+const QxForm = props => {
   // States
 
   const [qxForm, setQxForm] = useState({
     address: "",
-    startDate: "2010-01-01",
-    endDate: "2010-12-01",
+    startDate: "2020-05-01",
+    endDate: "2020-05-15",
     stage: "Select",
   });
 
   const [jobData, setJobData] = useState([]);
-  const [hasSubmit, setSubmit] = useState(false);
   const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -25,7 +24,9 @@ const QxForm = (props) => {
       setLoading(false);
     }
   }, [jobData]);
+
   // Handlers
+
   const inputChangeHandler = (e) => {
     setQxForm({ ...qxForm, [e.target.name]: e.target.value });
     setSubmit(false);
@@ -46,7 +47,7 @@ const QxForm = (props) => {
             formData.stage
         )
         .then((resp) => {
-          resp.data.length !== 0 ? handleSuccess(resp.data) : setLoading(false);
+          resp.data.length !== 0 ? handleSplitCol(resp.data) : setLoading(false);
         })
         .catch((err) => {
           alert(err);
@@ -65,7 +66,7 @@ const QxForm = (props) => {
             formData.stage
         )
         .then((resp) => {
-          resp.data.length !== 0 ? handleSuccess(resp.data) : setLoading(false);
+          resp.data.length !== 0 ? handleSplitCol(resp.data) : setLoading(false);
         })
         .catch((err) => {
           alert(err);
@@ -78,17 +79,26 @@ const QxForm = (props) => {
       endDate: "",
       stage: "Select",
     });
-    setSubmit(true);
   };
 
-  const handleSuccess = (resp) => {
-    resp.forEach(x => {
-      let newprops = x.job_Site.split(/[:,-]+/);
-      x.Builder = newprops[0];
-      x.Address = newprops[1];
-      x.Community = newprops[2];
+  const handleSplitCol = (resp) => {
+    resp.forEach(col => {
+      if(col.job_Site.includes("LGI") || col.job_Site.includes("K. Hov")){
+        let splitBuilder = col.job_Site.split(/[:]+/);
+        let splitAddr = splitBuilder[1].split(/[-]+/);
+        col.Builder = splitBuilder[0];
+        col.Address = splitAddr[0];
+        col.Community = splitAddr[1];
+      }
+      else {
+        let newprops = col.job_Site.split(/[:-]+/);
+        col.Builder = newprops[0];
+        col.Address = newprops[1];
+        col.Community = newprops[2];
+      }
     });
     setJobData(resp);
+    console.log(resp);
   }
 
 
@@ -159,7 +169,7 @@ const QxForm = (props) => {
       {isLoading ? (
         <img className="CPTFade" src={image} alt="Cathedral Logo" />
       ) : (
-        <QxList formData={jobData} hasSubmit={hasSubmit} />
+        <QxTable formData={jobData} />
       )}
     </>
   );
