@@ -6,14 +6,13 @@ import QxTable from "../QxTable/QxTable";
 import "./QxForm.css";
 import image from "../../../Assets/logo.png";
 
-const QxForm = props => {
+const QxForm = (props) => {
   // States
 
   const [qxForm, setQxForm] = useState({
-    address: "",
     startDate: "2020-05-01",
     endDate: "2020-05-15",
-    stage: "Select",
+    stage: "",
   });
 
   const [jobData, setJobData] = useState([]);
@@ -35,61 +34,43 @@ const QxForm = props => {
     event.preventDefault();
     let formData = { ...qxForm };
     setLoading(true);
-    if (formData.address === "") {
-      axios
-        .get(
+    axios
+      .get(
           "/" +
-            formData.startDate +
-            "/" +
-            formData.endDate +
-            "/" +
-            formData.stage
-        )
-        .then((resp) => {
-          resp.data.length !== 0 ? handleSplitCol(resp.data) : setLoading(false);
-        })
-        .catch((err) => {
-          alert(err);
-          setLoading(false);
-        });
-    } else {
-      axios
-        .get(
+          formData.startDate +
           "/" +
-            formData.address +
-            "/" +
-            formData.startDate +
-            "/" +
-            formData.endDate +
-            "/" +
-            formData.stage
-        )
-        .then((resp) => {
-          resp.data.length !== 0 ? handleSplitCol(resp.data) : setLoading(false);
-        })
-        .catch((err) => {
-          alert(err);
-          setLoading(false);
-        });
-    }
-    setQxForm({
-      address: "",
-      startDate: "",
-      endDate: "",
-      stage: "Select",
-    });
+          formData.endDate +
+          "/" +
+          formData.stage
+      )
+      .then((resp) => {
+        resp.data.length !== 0 ? handleSplitCol(resp.data) : setLoading(false);
+      })
+      .catch((err) => {
+        alert(err);
+        setLoading(false);
+      });
+      setQxForm({
+        startDate: "",
+        endDate: "",
+        stage: "",
+      });
   };
+ 
 
   const handleSplitCol = (resp) => {
-    resp.forEach(col => {
-      if(col.job_Site.includes("LGI") || col.job_Site.includes("K. Hov") || col.job_Site.includes("Dallas")){
+    resp.forEach((col) => {
+      if (
+        col.job_Site.includes("LGI") ||
+        col.job_Site.includes("K. Hov") ||
+        col.job_Site.includes("Dallas")
+      ) {
         let splitBuilder = col.job_Site.split(/[:]+/);
         let splitAddr = splitBuilder[1].split(/[-]+/);
         col.Builder = splitBuilder[0];
         col.Address = splitAddr[0];
         col.Community = splitAddr[1];
-      }
-      else {
+      } else {
         let newprops = col.job_Site.split(/[:-]+/);
         col.Builder = newprops[0];
         col.Address = newprops[1];
@@ -98,21 +79,11 @@ const QxForm = props => {
     });
     setJobData(resp);
     console.log(resp);
-  }
-
+  };
 
   return (
     <>
       <form className="GridForm" onSubmit={submitFormHandler}>
-        <label id="addrlabel">Street Address</label>
-        <input
-          type="text"
-          name="address"
-          value={qxForm.address}
-          onChange={inputChangeHandler}
-          aria-required="false"
-          aria-labelledby="addrlabel"
-        />
         <label id="startlabel">Start Date</label>
         <input
           type="date"
@@ -120,7 +91,8 @@ const QxForm = props => {
           value={qxForm.startDate}
           onChange={inputChangeHandler}
           aria-labelledby="startlabel"
-          aria-required="true"
+          aria-required
+          required
         />
         <label id="endlabel">End Date</label>
         <input
@@ -130,6 +102,7 @@ const QxForm = props => {
           onChange={inputChangeHandler}
           aria-labelledby="endlabel"
           aria-required="true"
+          required
         />
         <label id="stagelabel">Stage</label>
         <select
@@ -138,10 +111,9 @@ const QxForm = props => {
           value={qxForm.stage}
           aria-labelledby="stagelabel"
           aria-required="true"
+          required
         >
-          <option value="Select" aria-labelledby="stagelabel">
-            Select Stage
-          </option>
+          <option disabled value="">Select Stage</option>
           <option value="Rough" aria-labelledby="stagelabel">
             Rough
           </option>
