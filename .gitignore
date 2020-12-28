@@ -24,4 +24,12 @@ yarn-error.log*
 QxAPI/appsettings.json
 QxAPI/bin/*
 QxAPI/obj/*
+QxAPI/wwwroot/*
+QxAPI/.vs/*
 .vscode/tasks.json
+.vs/*
+QxAPI/.config/dotnet-tools.json
+QxAPI/Properties/PublishProfiles/*
+QxAPI/QxAPI.sln
+QxAPI/QxAPI.csproj
+QxAPI/QxAPI.csproj.user

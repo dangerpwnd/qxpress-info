@@ -21,7 +21,7 @@ namespace QxAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<JobContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("connectionstring")).EnableSensitiveDataLogging());
+            services.AddDbContext<JobContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("connectionstring")));
             services.AddAuthentication(CertificateAuthenticationDefaults.AuthenticationScheme).AddCertificate();
             services.AddControllers();
             services.AddCors();
@@ -40,11 +40,13 @@ namespace QxAPI
                 app.UseHsts();
             }
 
+            DefaultFilesOptions options = new DefaultFilesOptions();
+            options.DefaultFileNames.Clear();
+            options.DefaultFileNames.Add("index.html");
+
+            app.UseDefaultFiles(options);
+            app.UseStaticFiles();
             app.UseRouting();
-            app.UseCors(
-                options => options.WithOrigins("http://localhost:3000").AllowAnyMethod().AllowAnyHeader()
-            );
-            // app.UseHttpsRedirection();
             app.UseAuthorization();
             app.UseEndpoints( endpoints => {
                 endpoints.MapControllers();
