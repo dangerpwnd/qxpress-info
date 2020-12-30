@@ -57,26 +57,14 @@ const QxForm = (props) => {
       });
   };
  
+  // Logic to split job_Address into Address, Community columns
 
   const handleSplitCol = (resp) => {
     resp.forEach((col) => {
-      if (
-        col.job_Site.includes("LGI") ||
-        col.job_Site.includes("K. Hov") ||
-        col.job_Site.includes("Dallas")
-      ) {
-        let splitBuilder = col.job_Site.split(/[:]+/);
-        let splitAddr = splitBuilder[1].split(/[-]+/);
-        col.Builder = splitBuilder[0];
-        col.Address = splitAddr[0];
-        col.Community = splitAddr[1];
-      } else {
-        let newprops = col.job_Site.split(/[:-]+/);
-        col.Builder = newprops[0];
-        col.Address = newprops[1];
-        col.Community = newprops[2];
-      }
-    });
+        let addrProps = col.job_Address.split(/[-]+/);
+        col.Address = addrProps[0];
+        col.Community = addrProps[1];
+      });
     setJobData(resp);
     console.log(resp);
   };
