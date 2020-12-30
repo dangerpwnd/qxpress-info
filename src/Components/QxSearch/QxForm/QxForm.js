@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { CSVLink } from "react-csv";
+import moment from "moment";
 
 import axios from "../../../axios-stage";
 import QxTable from "../QxTable/QxTable";
@@ -45,6 +46,7 @@ const QxForm = (props) => {
       )
       .then((resp) => {
         resp.data.length !== 0 ? handleSplitCol(resp.data) : setLoading(false);
+        resp.data.length !== 0 ? handleDateFormat(resp.data) : setLoading(false);
       })
       .catch((err) => {
         alert(err);
@@ -61,13 +63,28 @@ const QxForm = (props) => {
 
   const handleSplitCol = (resp) => {
     resp.forEach((col) => {
-        let addrProps = col.job_Address.split(/[-]+/);
-        col.Address = addrProps[0];
-        col.Community = addrProps[1];
+        if(col.job_Address !== null){
+          let addrProps = col.job_Address.split(/[-]+/);
+          col.Address = addrProps[0];
+          col.Community = addrProps[1];
+        }
+        else{
+          return;
+        }
       });
     setJobData(resp);
-    console.log(resp);
   };
+
+  // Logic to change format of date
+
+  const handleDateFormat = (resp) => {
+    resp.forEach((col) => {
+      let newDate = moment(col.job_Date).format("MM/DD/YYYY");
+      col.job_Date = newDate;
+    });
+    setJobData(resp);
+    console.log(resp);
+  }
 
   return (
     <>
@@ -113,6 +130,13 @@ const QxForm = (props) => {
           </option>
         </select>
         <button type="submit">Pull Data</button>
+        
+      </form>
+      {isLoading ? (
+        <img className="CPTFade" src={image} alt="Cathedral Logo" />
+      ) : (
+        <>
+        <QxTable formData={jobData} />
         <CSVLink
           data={jobData}
           style={{
@@ -124,11 +148,7 @@ const QxForm = (props) => {
         >
           Download Results
         </CSVLink>
-      </form>
-      {isLoading ? (
-        <img className="CPTFade" src={image} alt="Cathedral Logo" />
-      ) : (
-        <QxTable formData={jobData} />
+        </>
       )}
     </>
   );
