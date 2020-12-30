@@ -47,8 +47,10 @@ namespace QxAPI
             app.UseDefaultFiles(options);
             app.UseStaticFiles();
             app.UseRouting();
+            app.UseCors(options => options.WithOrigins("http://localhost:3000").AllowAnyMethod().AllowAnyHeader());
             app.UseAuthorization();
-            app.UseEndpoints( endpoints => {
+            app.UseEndpoints(endpoints =>
+            {
                 endpoints.MapControllers();
             });
         }
