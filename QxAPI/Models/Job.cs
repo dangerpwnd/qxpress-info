@@ -8,5 +8,6 @@ public class Job {
     public string Job_City { get; set; }
     public string Job_Postal {get; set;}
     public string Job_Stage { get; set; }
+    public string Job_Notes {get; set;}
     
 }
