@@ -1,11 +1,16 @@
-import React, { useMemo } from "react";
+import React, { useState, useMemo } from "react";
 import { useTable, useSortBy, usePagination } from "react-table";
 import moment from "moment";
+import ReactModal from 'react-modal';
 
 import "./QxTable.css";
 
 const QxTable = (props) => {
   const { formData } = props;
+
+  const [showModal, setShowModal] = useState(false);
+
+  const [jobInfo, setJobInfo] = useState({content: ""})
 
   const data = useMemo(() => {
     return formData;
@@ -41,6 +46,13 @@ const QxTable = (props) => {
         Header: "Stage",
         accessor: "job_Stage",
       },
+      {
+        Header: "Notes",
+        accessor: "job_Notes",
+        Cell: ({cell}) => (
+          <button value="Job Notes" onClick={() => {handleNotesClick(cell.value)}}>Job Notes</button>
+        ),
+      },
     ],
     []
   );
@@ -70,6 +82,16 @@ const QxTable = (props) => {
     setPageSize,
     state: { pageIndex, pageSize },
   } = tableInstance;
+
+  const handleNotesClick = (jobinfo) => {
+    console.log(jobinfo);
+    setJobInfo({content: jobinfo});
+    setShowModal(true);
+  }
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  }
 
   return (
     <div className="FlexList">
@@ -176,6 +198,18 @@ const QxTable = (props) => {
           ))}
         </select>
       </div>
+      <ReactModal
+        isOpen={showModal}
+        contentLabel={"Job Notes"}
+        appElement={document.getElementById('root')}
+        onRequestClose={handleCloseModal}
+        shouldCloseOnOverlayClick={true}
+        shouldCloseOnEsc={true}
+        overlayClassName={"Overlay"}
+        className={"Modal"}
+      >
+        <p>{jobInfo.content}</p>
+      </ReactModal>
     </div>
   );
 };

@@ -7,8 +7,7 @@
   
   .FlexTable {
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-      width: 100%;
+      grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   }
   
   .ResultsTable {
@@ -29,5 +28,20 @@
   .ResultsRow:nth-child(odd) {
     background: #491D88;
     color: white;
+  }
+
+  .Overlay {
+    position: fixed;
+    z-index: 1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0,0,0,0.7);
+    padding: 2em;
+  }
+
+  .Modal {
+    background-color:#491D88 ;
+    padding: 1em 2em;
   }
   
