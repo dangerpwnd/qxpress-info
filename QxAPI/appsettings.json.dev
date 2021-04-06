@@ -1,0 +1,15 @@
+{
+    "Logging": {
+      "LogLevel": {
+        "Default": "Information",
+        "Microsoft": "Warning",
+        "Microsoft.Hosting.Lifetime": "Information",
+        "Microsoft.EntityFrameworkCore.Database.Command": "Information"
+      }
+    },
+    "ConnectionStrings": {
+      "connectionstring" : "Server=CPT-WS-5B75;Database=CPTXSQL;User Id=TestUser;Password=TestPass123$"
+    },
+    "AllowedHosts": "*"
+  }
+  
