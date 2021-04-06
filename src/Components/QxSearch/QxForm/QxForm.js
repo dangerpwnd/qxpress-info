@@ -11,8 +11,8 @@ const QxForm = (props) => {
   // States
 
   const [qxForm, setQxForm] = useState({
-    startDate: "2020-05-01",
-    endDate: "2020-05-15",
+    startDate: "2021-03-26",
+    endDate: "2021-03-26",
     stage: "",
   });
 
@@ -127,6 +127,15 @@ const QxForm = (props) => {
           </option>
           <option value="Trim" aria-labelledby="stagelabel">
             Trim
+          </option>
+          <option value="Builder Service" aria-labelledby="stagelabel">
+            Builder Service
+          </option>
+          <option value="Service" aria-labelledby="stagelabel">
+            Service
+          </option>
+          <option value="Builder Extras/Options" aria-labelledby="stagelabel">
+            Builder Extras/Options
           </option>
         </select>
         <button type="submit">Pull Data</button>
