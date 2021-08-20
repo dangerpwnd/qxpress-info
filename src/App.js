@@ -1,16 +1,13 @@
 import React from "react";
+
 import "./App.css";
-import QxForm from "./Components/QxSearch/QxForm/QxForm";
-import ErrorBoundary from "./ErrorBoundary.js";
+import "./Components/ByStages.js";
 
 const App = props => {
 
   return (
     <div role="main">
-      <h1>Qxpress Job Reports</h1>
-      <ErrorBoundary>
-        <QxForm />
-      </ErrorBoundary>
+      <ByStages />
     </div>
   );
 };
