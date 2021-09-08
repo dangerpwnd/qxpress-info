@@ -18,6 +18,7 @@ namespace QxAPI.Models {
                 eb.Property(v => v.Job_Postal).HasColumnName("Job_Postal");
                 eb.Property(v => v.Job_Stage).HasColumnName("Job_Descrip");
                 eb.Property(v => v.Job_Notes).HasColumnName("Job_Notes");
+                eb.Property(v => v.Job_Color).HasColumnName("Job_Color");
             });
         }
     }

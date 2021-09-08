@@ -53,6 +53,10 @@ const QxTable = (props) => {
           <button value="Job Notes" onClick={() => {handleNotesClick(cell.value)}}>Job Notes</button>
         ),
       },
+      {
+        Header: "Color",
+        accessor: "job_Color",
+      },
     ],
     []
   );

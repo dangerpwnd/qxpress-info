@@ -3,7 +3,7 @@ import React from 'react';
 import QxForm from "./QxSearch/QxForm/QxForm.js";
 import ErrorBoundary from "../ErrorBoundary.js";
 
-const ByTechs = props => {
+const ByTechs = () => {
 
     return (
         <>
