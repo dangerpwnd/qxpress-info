@@ -4,7 +4,7 @@ import moment from "moment";
 
 import QxTable from "../QxTable/QxTable";
 import './QxForm.module.css';
-import image from "../../../../public/logo.png";
+import image from "../../../public/logo.png";
 
 const QxForm = () => {
   // States
