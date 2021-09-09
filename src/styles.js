@@ -14,6 +14,15 @@ export const globalStyles = (
             h1 {
                 color: #ffffff;
                 text-align: center;
+            },
+            input[type="date"]:focus,
+            input[type="text"]:focus,
+            select:focus {
+            border-color: #2491eb;
+            outline: 1px solid #2491eb;
+            },
+            label {
+                font-weight: bold;
             }
         `}
     />
@@ -34,7 +43,6 @@ export const linkStyles = css`
     background-color: darkblue;
     }
 `
-
 
 // Styled Components
 

@@ -15,17 +15,6 @@
     transform: scale(1.025)
 }
 
-input[type="date"]:focus,
-input[type="text"]:focus,
-select:focus {
-  border-color: #2491eb;
-  outline: 1px solid #2491eb;
-}
-
-label {
-    font-weight: bold;
-}
-
 .CPTFade{
     animation: fadeInAnimation 1s;
     animation-iteration-count: infinite;

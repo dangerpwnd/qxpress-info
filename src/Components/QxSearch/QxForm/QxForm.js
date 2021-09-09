@@ -2,12 +2,11 @@ import React, { useState, useEffect } from "react";
 import { CSVLink } from "react-csv";
 import moment from "moment";
 
-import axios from "../../../axios-stage";
 import QxTable from "../QxTable/QxTable";
-import "./QxForm.css";
-import image from "../../../Assets/logo.png";
+import './QxForm.module.css';
+import image from "../../../../public/logo.png";
 
-const QxForm = (props) => {
+const QxForm = () => {
   // States
 
   const [qxForm, setQxForm] = useState({

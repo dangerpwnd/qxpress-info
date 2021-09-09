@@ -3,7 +3,7 @@ import { useTable, useSortBy, usePagination } from "react-table";
 import moment from "moment";
 import ReactModal from 'react-modal';
 
-import "./QxTable.css";
+import "./QxTable.module.css";
 
 const QxTable = (props) => {
   const { formData } = props;
