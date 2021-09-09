@@ -202,7 +202,7 @@ const QxTable = (props) => {
           ))}
         </select>
       </div>
-      <ReactModal
+      {/* <ReactModal
         isOpen={showModal}
         contentLabel={"Job Notes"}
         appElement={document.getElementById('root')}
@@ -213,7 +213,7 @@ const QxTable = (props) => {
         className={"Modal"}
       >
         <p>{jobInfo.content}</p>
-      </ReactModal>
+      </ReactModal> */}
     </div>
   );
 };
