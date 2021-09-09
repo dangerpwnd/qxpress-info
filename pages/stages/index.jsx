@@ -1,10 +1,9 @@
 import React from 'react';
 
-import QxForm from "./QxSearch/QxForm/QxForm.js";
-import ErrorBoundary from "../ErrorBoundary.js";
+import QxForm from '../../src/Components/QxSearch/QxForm/QxForm';
+import ErrorBoundary from '../../src/ErrorBoundary';
 
 const ByStages = () => {
-
     return (
         <>
             <h1>Qxpress Job Reports By Stages</h1>
@@ -13,6 +12,6 @@ const ByStages = () => {
             </ErrorBoundary>
         </>
     )
-};
+}
 
 export default ByStages;
