@@ -1,5 +1,4 @@
 import { css, Global, keyframes } from '@emotion/react';
-import { Link } from '@reach/router';
 import styled from '@emotion/styled';
 
 // Styles
@@ -50,6 +49,6 @@ export const StyledNav = styled.nav`
     ${navStyles};
 `
 
-export const StyledLink = styled(Link)`
+export const StyledLink = styled.a`
     ${linkStyles};
 `
