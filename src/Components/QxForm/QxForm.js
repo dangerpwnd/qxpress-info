@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { CSVLink } from "react-csv";
 import moment from "moment";
+import axios from "axios";
 
 import QxTable from "../QxTable/QxTable";
 import './QxForm.module.css';
@@ -34,28 +35,29 @@ const QxForm = () => {
     event.preventDefault();
     let formData = { ...qxForm };
     setLoading(true);
-    axios
-      .get(
-          "/" +
-          formData.startDate +
-          "/" +
-          formData.endDate +
-          "/" +
-          formData.stage
-      )
-      .then((resp) => {
-        resp.data.length !== 0 ? handleSplitCol(resp.data) : setLoading(false);
-        resp.data.length !== 0 ? handleDateFormat(resp.data) : setLoading(false);
-      })
-      .catch((err) => {
-        alert(err);
-        setLoading(false);
-      });
-      setQxForm({
-        startDate: "",
-        endDate: "",
-        stage: "",
-      });
+    // axios
+    //   .get(
+    //       "/" +
+    //       formData.startDate +
+    //       "/" +
+    //       formData.endDate +
+    //       "/" +
+    //       formData.stage
+    //   )
+    //   .then((resp) => {
+    //     resp.data.length !== 0 ? handleSplitCol(resp.data) : setLoading(false);
+    //     resp.data.length !== 0 ? handleDateFormat(resp.data) : setLoading(false);
+    //   })
+    //   .catch((err) => {
+    //     alert(err);
+    //     setLoading(false);
+    //   });
+    //   setQxForm({
+    //     startDate: "",
+    //     endDate: "",
+    //     stage: "",
+    //   });
+    axios.get("localhost:3000/api/stages/Rough").then((response) => console.log(response));
   };
  
   // Logic to split job_Address into Address, Community columns

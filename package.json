@@ -9,6 +9,8 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
+    "axios": "^0.21.4",
+    "knex": "^0.95.11",
     "moment": "^2.29.1",
     "next": "latest",
     "react": "latest",
@@ -17,7 +19,8 @@
     "react-error-overlay": "^6.0.8",
     "react-modal": "^3.12.1",
     "react-table": "^7.6.2",
-    "shortid": "^2.2.16"
+    "shortid": "^2.2.16",
+    "tedious": "^12.2.0"
   },
   "scripts": {
     "dev": "next dev",
