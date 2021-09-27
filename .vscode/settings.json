@@ -1,5 +1,6 @@
 {
     "cSpell.ignoreWords": [
+        "Descrip",
         "addrlabel",
         "catalog",
         "catalog cptxsql",
@@ -11,6 +12,7 @@
         "endlabel",
         "hsts",
         "id",
+        "knexconf",
         "newprops",
         "pass",
         "password",
