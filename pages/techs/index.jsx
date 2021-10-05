@@ -8,7 +8,7 @@ const ByTechs = () => {
     return (
         <>
             <StyledNav>
-                <StyledLink href="/stages">By Stages</StyledLink>
+                <StyledLink href="/jobtypes">By Job Types</StyledLink>
                 <StyledLink href="/techs">By Techs</StyledLink>
             </StyledNav>
             <h1>Qxpress Job Reports By Techs</h1>
