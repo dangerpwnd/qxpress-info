@@ -2,15 +2,15 @@ import config from '../../../knexconf'
 import nc from 'next-connect'
 
 const knex = require('knex')(config);
-const today = new Date().toLocaleDateString();
-const fullWeek =  new Date();
-fullWeek.setDate(fullWeek.getDate() + 7);
 
-const getJobsByStages =  nc()
+const getJobsByJobType =  nc()
     .get((req, res) => {
+        const { jobtype, start, end } = req.query;
+
         const knexQuery = () => {
             knex({qx: 'QXInfo'})
-            .whereBetween('qx.Job_Date', [today, fullWeek])
+            .where('qx.Job_Descrip', jobtype)
+            .whereBetween('qx.Job_Date', [start, end])
             .select({
                 jobDate: 'qx.Job_Date',
                 jobBuilder: 'qx.Job_Builder',
@@ -20,16 +20,17 @@ const getJobsByStages =  nc()
                 jobStage: 'qx.Job_Descrip',
                 jobNotes: 'qx.Job_Notes',
                 jobColor: 'qx.Job_Color',
+                jobCrew: 'qx.Job_Crew',
             })
             .then(resp => {
                 res.send(resp)
             })
             .catch(err => {
-                console.log(err)
+                res.json(err)
             })
         }
         knexQuery();
         }  
     )
 
-export default getJobsByStages
+export default getJobsByJobType

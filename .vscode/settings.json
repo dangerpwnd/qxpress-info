@@ -12,6 +12,7 @@
         "endlabel",
         "hsts",
         "id",
+        "jobtype",
         "knexconf",
         "newprops",
         "pass",

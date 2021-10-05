@@ -3,7 +3,7 @@ import { StyledNav, StyledLink } from "../src/styles";
 const Home = () => (
     <div role="main">
       <StyledNav>
-        <StyledLink href="/stages">By Stages</StyledLink>
+        <StyledLink href="/jobtypes">By Job Types</StyledLink>
         <StyledLink href="/techs">By Techs</StyledLink>
       </StyledNav>
       <div>
