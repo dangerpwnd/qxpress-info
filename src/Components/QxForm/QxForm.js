@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { CSVLink } from "react-csv";
-import moment from "moment";
 import axios from "axios";
 
 import QxTable from "../QxTable/QxTable";
@@ -35,37 +34,40 @@ const QxForm = () => {
     event.preventDefault();
     let formData = { ...qxForm };
     setLoading(true);
-    // axios
-    //   .get(
-    //       "/" +
-    //       formData.startDate +
-    //       "/" +
-    //       formData.endDate +
-    //       "/" +
-    //       formData.stage
-    //   )
-    //   .then((resp) => {
-    //     resp.data.length !== 0 ? handleSplitCol(resp.data) : setLoading(false);
-    //     resp.data.length !== 0 ? handleDateFormat(resp.data) : setLoading(false);
-    //   })
-    //   .catch((err) => {
-    //     alert(err);
-    //     setLoading(false);
-    //   });
-    //   setQxForm({
-    //     startDate: "",
-    //     endDate: "",
-    //     stage: "",
-    //   });
-    axios.get("localhost:3000/api/stages/Rough").then((response) => console.log(response));
+    axios
+      .get(
+          "/api/stages/" +
+          formData.stage +
+          "/?start=" +
+          formData.startDate +
+          "&end=" +
+          formData.endDate
+      )
+      .then((resp) => {
+        console.log(resp);
+        resp.data.length !== 0 ? handleSplitCol(resp.data) : setLoading(false);
+        resp.data.length !== 0 ? handleDateFormat(resp.data) : setLoading(false);
+        // console.log(resp);
+        // setLoading(false);
+      })
+      .catch((err) => {
+        alert(err);
+        setLoading(false);
+      });
+      setQxForm({
+        startDate: "",
+        endDate: "",
+        stage: "",
+      });
+    // axios.get("http://localhost:3000/api/stages/Rough").then((response) => console.log(response));
   };
  
   // Logic to split job_Address into Address, Community columns
 
   const handleSplitCol = (resp) => {
     resp.forEach((col) => {
-        if(col.job_Address !== null){
-          let addrProps = col.job_Address.split(/[-]+/);
+        if(col.jobAddress !== null){
+          let addrProps = col.jobAddress.split(/[-]+/);
           col.Address = addrProps[0];
           col.Community = addrProps[1];
         }
@@ -80,8 +82,8 @@ const QxForm = () => {
 
   const handleDateFormat = (resp) => {
     resp.forEach((col) => {
-      let newDate = moment(col.job_Date).format("MM/DD/YYYY");
-      col.job_Date = newDate;
+      const newDate = new Date(col.jobDate).toLocaleDateString();
+      col.jobDate = newDate;
     });
     setJobData(resp);
     console.log(resp);

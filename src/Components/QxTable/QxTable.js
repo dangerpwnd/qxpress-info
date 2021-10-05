@@ -1,6 +1,5 @@
 import React, { useState, useMemo } from "react";
 import { useTable, useSortBy, usePagination } from "react-table";
-import moment from "moment";
 import ReactModal from 'react-modal';
 
 import "./QxTable.module.css";
@@ -20,11 +19,11 @@ const QxTable = (props) => {
     () => [
       {
         Header: "Date",
-        accessor: data => moment(data.job_Date).format("MM/DD/YYYY"),
+        accessor: "jobDate",
       },
       {
         Header: "Builder",
-        accessor: "job_Builder",
+        accessor: "jobBuilder",
       },
       {
         Header: "Community",
@@ -36,15 +35,15 @@ const QxTable = (props) => {
       },
       {
         Header: "City",
-        accessor: "job_City",
+        accessor: "jobCity",
       },
       {
         Header: "ZIP",
-        accessor: "job_Postal"
+        accessor: "jobPostal"
       },
       {
         Header: "Stage",
-        accessor: "job_Stage",
+        accessor: "jobStage",
       },
       {
         Header: "Notes",
@@ -55,7 +54,7 @@ const QxTable = (props) => {
       },
       {
         Header: "Color",
-        accessor: "job_Color",
+        accessor: "jobColor",
       },
     ],
     []
