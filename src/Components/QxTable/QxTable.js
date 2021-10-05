@@ -56,6 +56,10 @@ const QxTable = (props) => {
         Header: "Color",
         accessor: "jobColor",
       },
+      {
+        Header: "Crew",
+        accessor: "jobCrew",
+      },
     ],
     []
   );
