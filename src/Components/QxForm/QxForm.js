@@ -4,14 +4,15 @@ import axios from "axios";
 
 import QxTable from "../QxTable/QxTable";
 import './QxForm.module.css';
-import image from "../../../public/logo.png";
+import image from "../../../public/logo.png"
 
+const today = new Date().toISOString().split('T')[0];
 const QxForm = () => {
   // States
 
   const [qxForm, setQxForm] = useState({
-    startDate: "2021-03-26",
-    endDate: "2021-03-26",
+    startDate: today,
+    endDate: today,
     stage: "",
   });
 
@@ -36,7 +37,7 @@ const QxForm = () => {
     setLoading(true);
     axios
       .get(
-          "/api/stages/" +
+          "/api/jobtypes/" +
           formData.stage +
           "/?start=" +
           formData.startDate +
@@ -47,19 +48,16 @@ const QxForm = () => {
         console.log(resp);
         resp.data.length !== 0 ? handleSplitCol(resp.data) : setLoading(false);
         resp.data.length !== 0 ? handleDateFormat(resp.data) : setLoading(false);
-        // console.log(resp);
-        // setLoading(false);
       })
       .catch((err) => {
         alert(err);
         setLoading(false);
       });
       setQxForm({
-        startDate: "",
-        endDate: "",
+        startDate: today,
+        endDate: today,
         stage: "",
       });
-    // axios.get("http://localhost:3000/api/stages/Rough").then((response) => console.log(response));
   };
  
   // Logic to split job_Address into Address, Community columns
@@ -82,11 +80,10 @@ const QxForm = () => {
 
   const handleDateFormat = (resp) => {
     resp.forEach((col) => {
-      const newDate = new Date(col.jobDate).toLocaleDateString();
+      const newDate = new Date(col.jobDate).toISOString().split('T')[0];
       col.jobDate = newDate;
     });
     setJobData(resp);
-    console.log(resp);
   }
 
   return (
