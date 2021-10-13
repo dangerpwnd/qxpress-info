@@ -9,7 +9,7 @@ const getJobsByJobType =  nc()
 
         const knexQuery = () => {
             knex({qx: 'QXInfo'})
-            .where('qx.Job_Descrip', jobtype)
+            .where('qx.Job_Descrip', 'like', `%${jobtype}%`)
             .whereBetween('qx.Job_Date', [start, end])
             .select({
                 jobDate: 'qx.Job_Date',
@@ -23,6 +23,7 @@ const getJobsByJobType =  nc()
                 jobCrew: 'qx.Job_Crew',
             })
             .then(resp => {
+                console.log(resp)
                 res.send(resp)
             })
             .catch(err => {

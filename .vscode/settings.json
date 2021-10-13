@@ -13,6 +13,8 @@
         "hsts",
         "id",
         "jobtype",
+        "jobtypelabel",
+        "jobtypes",
         "knexconf",
         "newprops",
         "pass",

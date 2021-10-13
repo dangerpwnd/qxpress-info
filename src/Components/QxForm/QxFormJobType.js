@@ -7,23 +7,36 @@ import './QxForm.module.css';
 import image from "../../../public/logo.png"
 
 const today = new Date().toISOString().split('T')[0];
-const QxForm = () => {
+
+const QxFormJobType = () => {
   // States
 
   const [qxForm, setQxForm] = useState({
     startDate: today,
     endDate: today,
-    stage: "",
+    jobtype: "",
   });
 
   const [jobData, setJobData] = useState([]);
   const [isLoading, setLoading] = useState(false);
+  const [jobTypes, setJobTypes] = useState([]);
 
   useEffect(() => {
     if (jobData.length > 0) {
       setLoading(false);
     }
   }, [jobData]);
+
+  useEffect(() => {
+    axios
+      .get("/api/jobtypes")
+      .then((resp) => {
+        setJobTypes(resp.data);
+      })
+      .catch(() => {
+        alert("Job Type API Not Available");
+      })
+  }, [])
 
   // Handlers
 
@@ -38,14 +51,13 @@ const QxForm = () => {
     axios
       .get(
           "/api/jobtypes/" +
-          formData.stage +
+          formData.jobtype +
           "/?start=" +
           formData.startDate +
           "&end=" +
           formData.endDate
       )
       .then((resp) => {
-        console.log(resp);
         resp.data.length !== 0 ? handleSplitCol(resp.data) : setLoading(false);
         resp.data.length !== 0 ? handleDateFormat(resp.data) : setLoading(false);
       })
@@ -56,7 +68,7 @@ const QxForm = () => {
       setQxForm({
         startDate: today,
         endDate: today,
-        stage: "",
+        jobtype: "",
       });
   };
  
@@ -86,6 +98,19 @@ const QxForm = () => {
     setJobData(resp);
   }
 
+  // List of option elements for form
+  
+  const jobTypeList = jobTypes.map(opt => {
+      if(opt.JobType != 'Builder Extras/Options'){
+        return (<option key={opt.JobType} value={opt.JobType} aria-labelledby="jobtypelabel"> 
+        {opt.JobType}
+        </option>)
+      }
+      return (<option key={opt.JobType} value="Extras" aria-labelledby="jobtypelabel">
+        {opt.JobType}
+      </option>)
+  })
+
   return (
     <>
       <form className="GridForm" onSubmit={submitFormHandler}>
@@ -109,34 +134,18 @@ const QxForm = () => {
           aria-required="true"
           required
         />
-        <label id="stagelabel">Stage</label>
+        <label id="stagelabel">Job Type</label>
         <select
-          name="stage"
+          name="jobtype"
           onChange={inputChangeHandler}
-          value={qxForm.stage}
-          aria-labelledby="stagelabel"
+          value={qxForm.jobtype}
+          aria-labelledby="jobtypelabel"
           aria-required="true"
           required
+          
         >
           <option disabled value="">Select Stage</option>
-          <option value="Rough" aria-labelledby="stagelabel">
-            Rough
-          </option>
-          <option value="Topout" aria-labelledby="stagelabel">
-            Topout
-          </option>
-          <option value="Trim" aria-labelledby="stagelabel">
-            Trim
-          </option>
-          <option value="Builder Service" aria-labelledby="stagelabel">
-            Builder Service
-          </option>
-          <option value="Service" aria-labelledby="stagelabel">
-            Service
-          </option>
-          <option value="Builder Extras/Options" aria-labelledby="stagelabel">
-            Builder Extras/Options
-          </option>
+          {jobTypeList} 
         </select>
         <button type="submit">Pull Data</button>
         
@@ -163,4 +172,4 @@ const QxForm = () => {
   );
 };
 
-export default QxForm;
+export default QxFormJobType;

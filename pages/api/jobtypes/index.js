@@ -15,7 +15,7 @@ const getListJobType =  nc()
             .orWhere('Descrip_Descrip', 'Service')
             .orWhere('Descrip_Descrip', 'Builder Extras/Options')
             .select({
-                Stage: 'qx.Descrip_Descrip'
+                JobType: 'qx.Descrip_Descrip'
             })
             .then(resp => {
                 res.send(resp)
