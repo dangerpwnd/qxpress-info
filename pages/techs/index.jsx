@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { StyledNav, StyledLink } from "../../src/styles";
-import QxForm from '../../src/Components/QxForm/QxForm';
+import QxFormTech from '../../src/Components/QxForm/QxFormTech';
 import ErrorBoundary from '../../src/Components/ErrorBoundary';
 
 const ByTechs = () => {
@@ -13,7 +13,7 @@ const ByTechs = () => {
             </StyledNav>
             <h1>Qxpress Job Reports By Techs</h1>
             <ErrorBoundary>
-                <QxForm />
+                <QxFormTech />
             </ErrorBoundary>
         </>
     )
