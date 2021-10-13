@@ -13,7 +13,7 @@ const QxFormTech = () => {
   const [qxForm, setQxForm] = useState({
     startDate: today,
     endDate: today,
-    stage: "",
+    tech: "",
   });
 
   const [jobData, setJobData] = useState([]);
@@ -24,6 +24,20 @@ const QxFormTech = () => {
       setLoading(false);
     }
   }, [jobData]);
+
+  useEffect(() => {
+    axios
+      .get(
+        "/api/techs"
+      )
+      .then((resp) => {
+        console.log(resp)
+      }
+      )
+      .catch((err) => {
+        console.log(err)
+      });
+  }, [])
 
   // Handlers
 
@@ -37,15 +51,14 @@ const QxFormTech = () => {
     setLoading(true);
     axios
       .get(
-          "/api/jobtypes/" +
-          formData.stage +
+          "/api/techs/" +
+          formData.tech +
           "/?start=" +
           formData.startDate +
           "&end=" +
           formData.endDate
       )
       .then((resp) => {
-        console.log(resp);
         resp.data.length !== 0 ? handleSplitCol(resp.data) : setLoading(false);
         resp.data.length !== 0 ? handleDateFormat(resp.data) : setLoading(false);
       })
@@ -56,7 +69,7 @@ const QxFormTech = () => {
       setQxForm({
         startDate: today,
         endDate: today,
-        stage: "",
+        tech: "",
       });
   };
  
@@ -109,32 +122,32 @@ const QxFormTech = () => {
           aria-required="true"
           required
         />
-        <label id="stagelabel">Stage</label>
+        <label id="techlabel">Tech</label>
         <select
-          name="stage"
+          name="tech"
           onChange={inputChangeHandler}
           value={qxForm.stage}
-          aria-labelledby="stagelabel"
+          aria-labelledby="techlabel"
           aria-required="true"
           required
         >
           <option disabled value="">Select Stage</option>
-          <option value="Rough" aria-labelledby="stagelabel">
+          <option value="Rough" aria-labelledby="techlabel">
             Rough
           </option>
-          <option value="Topout" aria-labelledby="stagelabel">
+          <option value="Topout" aria-labelledby="techlabel">
             Topout
           </option>
-          <option value="Trim" aria-labelledby="stagelabel">
+          <option value="Trim" aria-labelledby="techlabel">
             Trim
           </option>
-          <option value="Builder Service" aria-labelledby="stagelabel">
+          <option value="Builder Service" aria-labelledby="techlabel">
             Builder Service
           </option>
-          <option value="Service" aria-labelledby="stagelabel">
+          <option value="Service" aria-labelledby="techlabel">
             Service
           </option>
-          <option value="Builder Extras/Options" aria-labelledby="stagelabel">
+          <option value="Builder Extras/Options" aria-labelledby="techlabel">
             Builder Extras/Options
           </option>
         </select>
