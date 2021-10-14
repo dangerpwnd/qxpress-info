@@ -1,6 +1,5 @@
 import React, { useState, useMemo } from "react";
 import { useTable, useSortBy, usePagination } from "react-table";
-import ReactModal from 'react-modal';
 
 import "./QxTable.module.css";
 
