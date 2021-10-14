@@ -16,6 +16,7 @@ const QxFormTech = () => {
     tech: "",
   });
 
+  const [techData, setTechData] = useState([]);
   const [jobData, setJobData] = useState([]);
   const [isLoading, setLoading] = useState(false);
 
@@ -31,11 +32,11 @@ const QxFormTech = () => {
         "/api/techs"
       )
       .then((resp) => {
-        console.log(resp)
+        setTechData(resp.data)
       }
       )
       .catch((err) => {
-        console.log(err)
+        alert("Tech API Not Available")
       });
   }, [])
 
@@ -99,6 +100,14 @@ const QxFormTech = () => {
     setJobData(resp);
   }
 
+  // List of techs as options for form
+
+  const techList = techData.map(opt => {
+    return (<option key={opt.CrewName} value={opt.CrewName} aria-labelledby="techlabel">
+    {opt.CrewName}
+  </option>)
+  })
+
   return (
     <>
       <form className="GridForm" onSubmit={submitFormHandler}>
@@ -131,25 +140,7 @@ const QxFormTech = () => {
           aria-required="true"
           required
         >
-          <option disabled value="">Select Stage</option>
-          <option value="Rough" aria-labelledby="techlabel">
-            Rough
-          </option>
-          <option value="Topout" aria-labelledby="techlabel">
-            Topout
-          </option>
-          <option value="Trim" aria-labelledby="techlabel">
-            Trim
-          </option>
-          <option value="Builder Service" aria-labelledby="techlabel">
-            Builder Service
-          </option>
-          <option value="Service" aria-labelledby="techlabel">
-            Service
-          </option>
-          <option value="Builder Extras/Options" aria-labelledby="techlabel">
-            Builder Extras/Options
-          </option>
+          {techList}
         </select>
         <button type="submit">Pull Data</button>
         
