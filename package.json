@@ -11,6 +11,7 @@
     "knex": "^0.95.11",
     "next": "latest",
     "next-connect": "^0.10.2",
+    "prettier": "^2.4.1",
     "react": "latest",
     "react-csv": "^2.0.3",
     "react-dom": "latest",
@@ -41,6 +42,10 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.3.7",
+    "eslint": "^8.0.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.26.1",
     "postcss": "^8.3.9",
     "tailwindcss": "^2.2.17"
   }
