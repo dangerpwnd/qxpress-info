@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import { CSVLink } from "react-csv";
 import axios from "axios";
 
-import QxTable from "../QxTable/QxTable";
+import QxTable from '../QxTable/QxTable';
 import './QxForm.module.css';
-import image from "../../../public/logo.png"
+import image from '../../public/logo.png';
 
 const today = new Date().toISOString().split('T')[0];
 const QxFormTech = () => {
