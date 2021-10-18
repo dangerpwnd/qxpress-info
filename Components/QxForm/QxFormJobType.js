@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import { CSVLink } from "react-csv";
 import axios from "axios";
 
-import QxTable from '../QxTable/QxTable';
-import './QxForm.module.css';
-import image from '../../public/logo.png';
+import QxTable from "../QxTable/QxTable";
+import "./QxForm.module.css";
+import image from "../../public/logo.png";
 
-const today = new Date().toISOString().split('T')[0];
+const today = new Date().toISOString().split("T")[0];
 
 const QxFormJobType = () => {
   // States
@@ -35,8 +35,8 @@ const QxFormJobType = () => {
       })
       .catch(() => {
         alert("Job Type API Not Available");
-      })
-  }, [])
+      });
+  }, []);
 
   // Handlers
 
@@ -50,7 +50,7 @@ const QxFormJobType = () => {
     setLoading(true);
     axios
       .get(
-          "/api/jobtypes/" +
+        "/api/jobtypes/" +
           formData.jobtype +
           "/?start=" +
           formData.startDate +
@@ -59,32 +59,33 @@ const QxFormJobType = () => {
       )
       .then((resp) => {
         resp.data.length !== 0 ? handleSplitCol(resp.data) : setLoading(false);
-        resp.data.length !== 0 ? handleDateFormat(resp.data) : setLoading(false);
+        resp.data.length !== 0
+          ? handleDateFormat(resp.data)
+          : setLoading(false);
       })
       .catch((err) => {
         alert(err);
         setLoading(false);
       });
-      setQxForm({
-        startDate: today,
-        endDate: today,
-        jobtype: "",
-      });
+    setQxForm({
+      startDate: today,
+      endDate: today,
+      jobtype: "",
+    });
   };
- 
+
   // Logic to split job_Address into Address, Community columns
 
   const handleSplitCol = (resp) => {
     resp.forEach((col) => {
-        if(col.jobAddress !== null){
-          let addrProps = col.jobAddress.split(/[-]+/);
-          col.Address = addrProps[0];
-          col.Community = addrProps[1];
-        }
-        else{
-          return;
-        }
-      });
+      if (col.jobAddress !== null) {
+        let addrProps = col.jobAddress.split(/[-]+/);
+        col.Address = addrProps[0];
+        col.Community = addrProps[1];
+      } else {
+        return;
+      }
+    });
     setJobData(resp);
   };
 
@@ -92,24 +93,32 @@ const QxFormJobType = () => {
 
   const handleDateFormat = (resp) => {
     resp.forEach((col) => {
-      const newDate = new Date(col.jobDate).toISOString().split('T')[0];
+      const newDate = new Date(col.jobDate).toISOString().split("T")[0];
       col.jobDate = newDate;
     });
     setJobData(resp);
-  }
+  };
 
   // List of option elements for form
-  
-  const jobTypeList = jobTypes.map(opt => {
-      if(opt.JobType != 'Builder Extras/Options'){
-        return (<option key={opt.JobType} value={opt.JobType} aria-labelledby="jobtypelabel"> 
+
+  const jobTypeList = jobTypes.map((opt) => {
+    if (opt.JobType != "Builder Extras/Options") {
+      return (
+        <option
+          key={opt.JobType}
+          value={opt.JobType}
+          aria-labelledby="jobtypelabel"
+        >
+          {opt.JobType}
+        </option>
+      );
+    }
+    return (
+      <option key={opt.JobType} value="Extras" aria-labelledby="jobtypelabel">
         {opt.JobType}
-        </option>)
-      }
-      return (<option key={opt.JobType} value="Extras" aria-labelledby="jobtypelabel">
-        {opt.JobType}
-      </option>)
-  })
+      </option>
+    );
+  });
 
   return (
     <>
@@ -142,30 +151,30 @@ const QxFormJobType = () => {
           aria-labelledby="jobtypelabel"
           aria-required="true"
           required
-          
         >
-          <option disabled value="">Select Stage</option>
-          {jobTypeList} 
+          <option selected disabled value="">
+            Select Stage
+          </option>
+          {jobTypeList}
         </select>
         <button type="submit">Pull Data</button>
-        
       </form>
       {isLoading ? (
         <img className="CPTFade" src={image} alt="Cathedral Logo" />
       ) : (
         <>
-        <QxTable formData={jobData} />
-        <CSVLink
-          data={jobData}
-          style={{
-            color: "white",
-            cursor: "pointer",
-            font: "inherit",
-            fontWeight: "bold",
-          }}
-        >
-          Download Results
-        </CSVLink>
+          <QxTable formData={jobData} />
+          <CSVLink
+            data={jobData}
+            style={{
+              color: "white",
+              cursor: "pointer",
+              font: "inherit",
+              fontWeight: "bold",
+            }}
+          >
+            Download Results
+          </CSVLink>
         </>
       )}
     </>
