@@ -1,14 +1,12 @@
-import React, { useState, useMemo } from "react";
-import { useTable, useSortBy, usePagination } from "react-table";
-
-import "./QxTable.module.css";
+import React, { useState, useMemo } from 'react';
+import { useTable, useSortBy, usePagination } from 'react-table';
 
 const QxTable = (props) => {
   const { formData } = props;
 
   const [showModal, setShowModal] = useState(false);
 
-  const [jobInfo, setJobInfo] = useState({content: ""})
+  const [jobInfo, setJobInfo] = useState({ content: '' });
 
   const data = useMemo(() => {
     return formData;
@@ -17,47 +15,54 @@ const QxTable = (props) => {
   const columns = useMemo(
     () => [
       {
-        Header: "Date",
-        accessor: "jobDate",
+        Header: 'Date',
+        accessor: 'jobDate',
       },
       {
-        Header: "Builder",
-        accessor: "jobBuilder",
+        Header: 'Builder',
+        accessor: 'jobBuilder',
       },
       {
-        Header: "Community",
-        accessor: "Community",
+        Header: 'Community',
+        accessor: 'Community',
       },
       {
-        Header: "Address",
-        accessor: "Address",
+        Header: 'Address',
+        accessor: 'Address',
       },
       {
-        Header: "City",
-        accessor: "jobCity",
+        Header: 'City',
+        accessor: 'jobCity',
       },
       {
-        Header: "ZIP",
-        accessor: "jobPostal"
+        Header: 'ZIP',
+        accessor: 'jobPostal',
       },
       {
-        Header: "Stage",
-        accessor: "jobStage",
+        Header: 'Stage',
+        accessor: 'jobStage',
       },
       {
-        Header: "Notes",
-        accessor: "job_Notes",
-        Cell: ({cell}) => (
-          <button value="Job Notes" onClick={() => {handleNotesClick(cell.value)}}>Job Notes</button>
+        Header: 'Notes',
+        accessor: 'job_Notes',
+        Cell: ({ cell }) => (
+          <button
+            value="Job Notes"
+            onClick={() => {
+              handleNotesClick(cell.value);
+            }}
+          >
+            Job Notes
+          </button>
         ),
       },
       {
-        Header: "Color",
-        accessor: "jobColor",
+        Header: 'Color',
+        accessor: 'jobColor',
       },
       {
-        Header: "Crew",
-        accessor: "jobCrew",
+        Header: 'Crew',
+        accessor: 'jobCrew',
       },
     ],
     []
@@ -91,17 +96,20 @@ const QxTable = (props) => {
 
   const handleNotesClick = (jobinfo) => {
     console.log(jobinfo);
-    setJobInfo({content: jobinfo});
+    setJobInfo({ content: jobinfo });
     setShowModal(true);
-  }
+  };
 
   const handleCloseModal = () => {
     setShowModal(false);
-  }
+  };
 
   return (
-    <div className="FlexList">
-      <table {...getTableProps()} className=" ResultsTable">
+    <div className="flex flex-col items-center mb-4">
+      <table
+        {...getTableProps()}
+        className="border-solid border-4 border-white mb-4"
+      >
         <thead>
           {
             // Loop over the header rows
@@ -109,7 +117,7 @@ const QxTable = (props) => {
               // Apply the header row props
               <tr
                 {...headerGroup.getHeaderGroupProps()}
-                className="ResultsHeader FlexTable"
+                className="grid grid-cols-10 text-white border-b-4 border-white border-solid bg-gray-500"
               >
                 {
                   // Loop over the headers in each row
@@ -120,14 +128,14 @@ const QxTable = (props) => {
                     >
                       {
                         // Render the header
-                        column.render("Header")
+                        column.render('Header')
                       }
                       <span>
                         {column.isSorted
                           ? column.isSortedDesc
-                            ? " ⇩"
-                            : " ⇧" 
-                          : ""}{" "}
+                            ? ' ⇩'
+                            : ' ⇧'
+                          : ''}{' '}
                       </span>
                     </th>
                   ))
@@ -136,11 +144,17 @@ const QxTable = (props) => {
             ))
           }
         </thead>
-        <tbody {...getTableBodyProps()}>
+        <tbody
+          className="even:bg-cptx-purp-500 odd:bg-cptx-purp-700"
+          {...getTableBodyProps()}
+        >
           {page.map((row) => {
             prepareRow(row);
             return (
-              <tr {...row.getRowProps()} className="ResultsRow FlexTable">
+              <tr
+                {...row.getRowProps()}
+                className="grid grid-cols-10  items-center text-center text-white"
+              >
                 {
                   // Loop over the rows cells
                   row.cells.map((cell) => {
@@ -149,7 +163,7 @@ const QxTable = (props) => {
                       <td {...cell.getCellProps()}>
                         {
                           // Render the cell contents
-                          cell.render("Cell")
+                          cell.render('Cell')
                         }
                       </td>
                     );
@@ -162,25 +176,25 @@ const QxTable = (props) => {
       </table>
       <div className="pagination">
         <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
-          {"↞"}
-        </button>{" "}
+          {'↞'}
+        </button>{' '}
         <button onClick={() => previousPage()} disabled={!canPreviousPage}>
-          {"←"}
-        </button>{" "}
+          {'←'}
+        </button>{' '}
         <button onClick={() => nextPage()} disabled={!canNextPage}>
-          {"→"}
-        </button>{" "}
+          {'→'}
+        </button>{' '}
         <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
-          {"↠"}
-        </button>{" "}
+          {'↠'}
+        </button>{' '}
         <span>
-          Page{" "}
+          Page{' '}
           <strong>
             {pageIndex + 1} of {pageOptions.length}
-          </strong>{" "}
+          </strong>{' '}
         </span>
         <span>
-          | Go to page:{" "}
+          | Go to page:{' '}
           <input
             type="number"
             defaultValue={pageIndex + 1}
@@ -188,9 +202,9 @@ const QxTable = (props) => {
               const page = e.target.value ? Number(e.target.value) - 1 : 0;
               gotoPage(page);
             }}
-            style={{ width: "100px" }}
+            style={{ width: '100px' }}
           />
-        </span>{" "}
+        </span>{' '}
         <select
           value={pageSize}
           onChange={(e) => {
