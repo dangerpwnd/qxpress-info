@@ -1,19 +1,19 @@
-import React, { useState, useEffect } from "react";
-import { CSVLink } from "react-csv";
-import axios from "axios";
+import React, { useState, useEffect } from 'react';
+import { CSVLink } from 'react-csv';
+import axios from 'axios';
 
-import QxTable from "../QxTable/QxTable";
-import "./QxForm.module.css";
-import image from "../../public/logo.png";
+import QxTable from '../QxTable/QxTable';
+import './QxForm.module.css';
+import image from '../../public/logo.png';
 
-const today = new Date().toISOString().split("T")[0];
+const today = new Date().toISOString().split('T')[0];
 const QxFormTech = () => {
   // States
 
   const [qxForm, setQxForm] = useState({
     startDate: today,
     endDate: today,
-    tech: "",
+    tech: '',
   });
 
   const [techData, setTechData] = useState([]);
@@ -28,12 +28,12 @@ const QxFormTech = () => {
 
   useEffect(() => {
     axios
-      .get("/api/techs")
+      .get('/api/techs')
       .then((resp) => {
         setTechData(resp.data);
       })
       .catch((err) => {
-        alert("Tech API Not Available");
+        alert('Tech API Not Available');
       });
   }, []);
 
@@ -49,11 +49,11 @@ const QxFormTech = () => {
     setLoading(true);
     axios
       .get(
-        "/api/techs/" +
+        '/api/techs/' +
           formData.tech +
-          "/?start=" +
+          '/?start=' +
           formData.startDate +
-          "&end=" +
+          '&end=' +
           formData.endDate
       )
       .then((resp) => {
@@ -69,7 +69,7 @@ const QxFormTech = () => {
     setQxForm({
       startDate: today,
       endDate: today,
-      tech: "",
+      tech: '',
     });
   };
 
@@ -92,7 +92,7 @@ const QxFormTech = () => {
 
   const handleDateFormat = (resp) => {
     resp.forEach((col) => {
-      const newDate = new Date(col.jobDate).toISOString().split("T")[0];
+      const newDate = new Date(col.jobDate).toISOString().split('T')[0];
       col.jobDate = newDate;
     });
     setJobData(resp);
@@ -159,10 +159,10 @@ const QxFormTech = () => {
           <CSVLink
             data={jobData}
             style={{
-              color: "white",
-              cursor: "pointer",
-              font: "inherit",
-              fontWeight: "bold",
+              color: 'white',
+              cursor: 'pointer',
+              font: 'inherit',
+              fontWeight: 'bold',
             }}
           >
             Download Results

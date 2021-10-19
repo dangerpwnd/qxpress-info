@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { CSVLink } from "react-csv";
-import axios from "axios";
+import React, { useState, useEffect } from 'react';
+import { CSVLink } from 'react-csv';
+import axios from 'axios';
 
-import QxTable from "../QxTable/QxTable";
-import "./QxForm.module.css";
-import image from "../../public/logo.png";
+import QxTable from '../QxTable/QxTable';
+import './QxForm.module.css';
+import image from '../../public/logo.png';
 
-const today = new Date().toISOString().split("T")[0];
+const today = new Date().toISOString().split('T')[0];
 
 const QxFormJobType = () => {
   // States
@@ -14,7 +14,7 @@ const QxFormJobType = () => {
   const [qxForm, setQxForm] = useState({
     startDate: today,
     endDate: today,
-    jobtype: "",
+    jobtype: '',
   });
 
   const [jobData, setJobData] = useState([]);
@@ -29,12 +29,12 @@ const QxFormJobType = () => {
 
   useEffect(() => {
     axios
-      .get("/api/jobtypes")
+      .get('/api/jobtypes')
       .then((resp) => {
         setJobTypes(resp.data);
       })
       .catch(() => {
-        alert("Job Type API Not Available");
+        alert('Job Type API Not Available');
       });
   }, []);
 
@@ -50,11 +50,11 @@ const QxFormJobType = () => {
     setLoading(true);
     axios
       .get(
-        "/api/jobtypes/" +
+        '/api/jobtypes/' +
           formData.jobtype +
-          "/?start=" +
+          '/?start=' +
           formData.startDate +
-          "&end=" +
+          '&end=' +
           formData.endDate
       )
       .then((resp) => {
@@ -70,7 +70,7 @@ const QxFormJobType = () => {
     setQxForm({
       startDate: today,
       endDate: today,
-      jobtype: "",
+      jobtype: '',
     });
   };
 
@@ -93,7 +93,7 @@ const QxFormJobType = () => {
 
   const handleDateFormat = (resp) => {
     resp.forEach((col) => {
-      const newDate = new Date(col.jobDate).toISOString().split("T")[0];
+      const newDate = new Date(col.jobDate).toISOString().split('T')[0];
       col.jobDate = newDate;
     });
     setJobData(resp);
@@ -102,7 +102,7 @@ const QxFormJobType = () => {
   // List of option elements for form
 
   const jobTypeList = jobTypes.map((opt) => {
-    if (opt.JobType != "Builder Extras/Options") {
+    if (opt.JobType != 'Builder Extras/Options') {
       return (
         <option
           key={opt.JobType}
@@ -167,10 +167,10 @@ const QxFormJobType = () => {
           <CSVLink
             data={jobData}
             style={{
-              color: "white",
-              cursor: "pointer",
-              font: "inherit",
-              fontWeight: "bold",
+              color: 'white',
+              cursor: 'pointer',
+              font: 'inherit',
+              fontWeight: 'bold',
             }}
           >
             Download Results
