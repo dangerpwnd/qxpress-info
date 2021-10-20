@@ -2,3 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  .QxRows:nth-child(even) {
+    background-color: #673888;
+    padding: 1rem 0;
+  }
+
+  .QxRows:nth-child(odd) {
+    background-color: #c79dd7;
+    padding: 1rem 0;
+  }
+}
