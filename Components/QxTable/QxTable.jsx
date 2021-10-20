@@ -117,7 +117,7 @@ const QxTable = (props) => {
               // Apply the header row props
               <tr
                 {...headerGroup.getHeaderGroupProps()}
-                className="grid grid-cols-10 text-white border-b-4 border-white border-solid bg-gray-500"
+                className="grid grid-cols-10 text-white border-b-4 border-white border-solid bg-main-purp-dark"
               >
                 {
                   // Loop over the headers in each row
@@ -144,16 +144,13 @@ const QxTable = (props) => {
             ))
           }
         </thead>
-        <tbody
-          className="even:bg-cptx-purp-500 odd:bg-cptx-purp-700"
-          {...getTableBodyProps()}
-        >
+        <tbody {...getTableBodyProps()}>
           {page.map((row) => {
             prepareRow(row);
             return (
               <tr
                 {...row.getRowProps()}
-                className="grid grid-cols-10  items-center text-center text-white"
+                className="grid grid-cols-10 items-center text-center text-white QxRows"
               >
                 {
                   // Loop over the rows cells
