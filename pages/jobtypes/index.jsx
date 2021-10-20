@@ -5,15 +5,14 @@ import QxFormJobType from '../../Components/QxForm/QxFormJobType';
 import ErrorBoundary from '../../Components/ErrorBoundary';
 
 const ByJobTypes = () => {
-    return (
-        <>
-            <ErrorBoundary>
-            <LinkNav />
-                <h1>Qxpress Job Reports By Job Types</h1>
-                <QxFormJobType />
-            </ErrorBoundary>
-        </>
-    )
-}
+  return (
+    <div className="bg-mute-blue">
+      <ErrorBoundary>
+        <LinkNav heading="Qxpress Job Reports By Job Types" />
+        <QxFormJobType />
+      </ErrorBoundary>
+    </div>
+  );
+};
 
 export default ByJobTypes;
