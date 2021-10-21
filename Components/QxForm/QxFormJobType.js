@@ -121,7 +121,7 @@ const QxFormJobType = () => {
   });
 
   return (
-    <>
+    <div className="bg-mute-brown w-3/4 m-auto">
       <form className="GridForm" onSubmit={submitFormHandler}>
         <label id="startlabel">Start Date</label>
         <input
@@ -152,7 +152,7 @@ const QxFormJobType = () => {
           aria-required="true"
           required
         >
-          <option selected disabled value="">
+          <option defaultValue disabled value="">
             Select Stage
           </option>
           {jobTypeList}
@@ -177,7 +177,7 @@ const QxFormJobType = () => {
           </CSVLink>
         </>
       )}
-    </>
+    </div>
   );
 };
 

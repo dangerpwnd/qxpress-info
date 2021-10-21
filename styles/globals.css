@@ -3,13 +3,17 @@
 @tailwind utilities;
 
 @layer utilities {
+  html {
+    background-color: #805b87;
+  }
+
   .QxRows:nth-child(even) {
-    background-color: #673888;
+    background-color: #62875b;
     padding: 1rem 0;
   }
 
   .QxRows:nth-child(odd) {
-    background-color: #c79dd7;
+    background-color: #1a8a0f;
     padding: 1rem 0;
   }
 }

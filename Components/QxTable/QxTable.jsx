@@ -117,13 +117,14 @@ const QxTable = (props) => {
               // Apply the header row props
               <tr
                 {...headerGroup.getHeaderGroupProps()}
-                className="grid grid-cols-10 text-white border-b-4 border-white border-solid bg-main-purp-dark"
+                className="grid grid-cols-10 border-b-4 border-white border-solid bg-mute-purp"
               >
                 {
                   // Loop over the headers in each row
                   headerGroup.headers.map((column) => (
                     // Apply the header cell props
                     <th
+                      className="text-white"
                       {...column.getHeaderProps(column.getSortByToggleProps())}
                     >
                       {
@@ -150,14 +151,14 @@ const QxTable = (props) => {
             return (
               <tr
                 {...row.getRowProps()}
-                className="grid grid-cols-10 items-center text-center text-white QxRows"
+                className="grid grid-cols-10 items-center text-center QxRows"
               >
                 {
                   // Loop over the rows cells
                   row.cells.map((cell) => {
                     // Apply the cell props
                     return (
-                      <td {...cell.getCellProps()}>
+                      <td className="text-white" {...cell.getCellProps()}>
                         {
                           // Render the cell contents
                           cell.render('Cell')
