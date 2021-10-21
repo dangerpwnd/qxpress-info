@@ -3,9 +3,12 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     colors: {
-      'mute-blue': '#475F77',
-      'sand-accent': '#FEFCED',
-      'mute-purp': '#c79dd7',
+      'mute-blue': '#5B7887',
+      'bright-blue': '#00798F',
+      'mute-green': '#62875B',
+      'bright-green': '#1A8A0F',
+      'mute-brown': '#876A5B',
+      'mute-purp': '#805B87',
       'main-purp': {
         light: '#673888',
         dark: '#4d1b7b',
