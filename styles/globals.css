@@ -4,16 +4,17 @@
 
 @layer utilities {
   html {
-    background-color: #805b87;
+    background-color: #72506b;
+    color: white;
   }
 
   .QxRows:nth-child(even) {
-    background-color: #62875b;
+    background-color: #825a8a;
     padding: 1rem 0;
   }
 
   .QxRows:nth-child(odd) {
-    background-color: #1a8a0f;
+    background-color: #6c5380;
     padding: 1rem 0;
   }
 }
