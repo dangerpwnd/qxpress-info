@@ -121,8 +121,11 @@ const QxFormJobType = () => {
   });
 
   return (
-    <div className="bg-mute-brown w-3/4 m-auto">
-      <form className="GridForm" onSubmit={submitFormHandler}>
+    <div className="w-3/4 m-auto">
+      <form
+        className="w-1/4 m-auto grid grid-cols-2 place-items-center"
+        onSubmit={submitFormHandler}
+      >
         <label id="startlabel">Start Date</label>
         <input
           type="date"
@@ -158,23 +161,23 @@ const QxFormJobType = () => {
           {jobTypeList}
         </select>
         <button type="submit">Pull Data</button>
+        <CSVLink
+          data={jobData}
+          style={{
+            color: 'white',
+            cursor: 'pointer',
+            font: 'inherit',
+            fontWeight: 'bold',
+          }}
+        >
+          Download Results
+        </CSVLink>
       </form>
       {isLoading ? (
         <img className="CPTFade" src={image} alt="Cathedral Logo" />
       ) : (
         <>
           <QxTable formData={jobData} />
-          <CSVLink
-            data={jobData}
-            style={{
-              color: 'white',
-              cursor: 'pointer',
-              font: 'inherit',
-              fontWeight: 'bold',
-            }}
-          >
-            Download Results
-          </CSVLink>
         </>
       )}
     </div>
