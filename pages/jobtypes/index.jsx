@@ -6,9 +6,9 @@ import ErrorBoundary from '../../Components/ErrorBoundary';
 
 const ByJobTypes = () => {
   return (
-    <div className="bg-mute-blue">
+    <div>
       <ErrorBoundary>
-        <LinkNav heading="Qxpress Job Reports By Job Types" />
+        <LinkNav className="h-1/3" heading="Qxpress Job Reports By Job Types" />
         <QxFormJobType />
       </ErrorBoundary>
     </div>

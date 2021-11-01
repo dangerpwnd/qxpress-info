@@ -6,9 +6,9 @@ import ErrorBoundary from '../../Components/ErrorBoundary';
 
 const ByTechs = () => {
   return (
-    <div className="bg-deep-purple-300">
+    <div>
       <ErrorBoundary>
-        <LinkNav heading="Qxpress Job Reports By Techs" />
+        <LinkNav className="h-1/3" heading="Qxpress Job Reports By Techs" />
         <QxFormTech />
       </ErrorBoundary>
     </div>
