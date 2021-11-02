@@ -123,7 +123,7 @@ const QxFormJobType = () => {
   return (
     <div className="w-3/4 m-auto">
       <form
-        className="w-1/4 m-auto grid grid-cols-2 place-items-center"
+        className="w-1/3 my-8 mx-auto grid gap-2 grid-cols-2 place-items-center border-2 bg-off-white border-white rounded-lg py-2 text-black font-bold"
         onSubmit={submitFormHandler}
       >
         <label id="startlabel">Start Date</label>
@@ -160,15 +160,19 @@ const QxFormJobType = () => {
           </option>
           {jobTypeList}
         </select>
-        <button type="submit">Pull Data</button>
+        <button
+          type="submit"
+          className="text-x1 text-white font-bold border-2 m-2 p-2 border-white rounded-lg bg-mute-purp hover:bg-white focus:bg-white hover:border-mute-purp focus:border-mute-purp hover:text-mute-purp focus:text-mute-purp"
+        >
+          Pull Data
+        </button>
         <CSVLink
           data={jobData}
           style={{
-            color: 'white',
             cursor: 'pointer',
             font: 'inherit',
-            fontWeight: 'bold',
           }}
+          className="text-x1 text-white font-bold border-2 m-2 p-2 border-white rounded-lg bg-mute-purp hover:bg-white focus:bg-white hover:border-mute-purp focus:border-mute-purp hover:text-mute-purp focus:text-mute-purp"
         >
           Download Results
         </CSVLink>

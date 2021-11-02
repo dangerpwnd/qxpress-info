@@ -108,7 +108,7 @@ const QxTable = (props) => {
     <div className="flex flex-col items-center mb-4">
       <table
         {...getTableProps()}
-        className="border-solid border-4 border-white mb-4"
+        className="mb-4 border-collapse rounded-lg overflow-hidden"
       >
         <thead>
           {
@@ -117,14 +117,14 @@ const QxTable = (props) => {
               // Apply the header row props
               <tr
                 {...headerGroup.getHeaderGroupProps()}
-                className="grid grid-cols-10 border-b-4 border-white border-solid bg-mute-purp"
+                className="grid grid-cols-10 border-b-4 border-white-500 bg-off-white"
               >
                 {
                   // Loop over the headers in each row
                   headerGroup.headers.map((column) => (
                     // Apply the header cell props
                     <th
-                      className="text-white"
+                      className="text-black"
                       {...column.getHeaderProps(column.getSortByToggleProps())}
                     >
                       {

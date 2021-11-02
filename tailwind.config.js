@@ -6,6 +6,7 @@ module.exports = {
       colors: {
         'main-purp': '#72506B',
         'mute-purp': '#8A5A68',
+        'off-white': '#D4CAD5',
       },
     },
     variants: {},
