@@ -1,42 +1,29 @@
+import React from 'react';
 import Link from 'next/link';
 import { gsap } from 'gsap';
 
-const hoverAnim1 = () => {
-  gsap.to('.navlink1', {
-    x: 50,
-    yoyo: true,
-    repeat: 1,
-  });
-};
-
-const hoverAnim2 = () => {
-  gsap.to('.navlink2', {
-    x: 50,
-    yoyo: true,
-    repeat: 1,
-  });
-};
-
 const LinkNav = (props) => {
+  const onEnter = ({ currentTarget }) => {
+    gsap.to(currentTarget, { x: 50 });
+  };
+
+  const onLeave = ({ currentTarget }) => {
+    gsap.to(currentTarget, { x: 0 });
+  };
+
   return (
     <div className="grid grid-cols-3 items-stretch h-24 mb-4">
       <nav className="w-full flex flex-col justify-evenly">
-        <div className="navlink1">
+        <div className="navlink" onMouseEnter={onEnter} onMouseLeave={onLeave}>
           <Link href="/jobtypes">
-            <a
-              className="text-white border-2 border-white bg-mute-purp p-2"
-              onMouseEnter={hoverAnim1}
-            >
+            <a className="text-white border-2 border-white bg-mute-purp p-2">
               By Job Types
             </a>
           </Link>
         </div>
-        <div className="navlink2">
+        <div className="navlink" onMouseEnter={onEnter} onMouseLeave={onLeave}>
           <Link href="/techs">
-            <a
-              className="text-white border-2 border-white bg-mute-purp p-2"
-              onMouseEnter={hoverAnim2}
-            >
+            <a className="text-white border-2 border-white bg-mute-purp p-2">
               By Techs
             </a>
           </Link>

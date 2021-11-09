@@ -39,5 +39,5 @@
   "typescript.preferences.quoteStyle": "single",
   "prettier.jsxSingleQuote": true,
   "prettier.singleQuote": true,
-  "cSpell.words": ["cptx", "lightpurp", "purp", "techlabel"]
+  "cSpell.words": ["cptx", "lightpurp", "navlink", "purp", "techlabel"]
 }
