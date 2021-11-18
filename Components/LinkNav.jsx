@@ -30,7 +30,7 @@ const LinkNav = (props) => {
         </div>
       </nav>
       <div className="self-center">
-        <h1 className="text-center text-2xl">{props.heading}</h1>
+        <h1 className="text-center text-3xl">{props.heading}</h1>
       </div>
       <div className="self-center">
         <h1 className="text-center">What would you like here?</h1>
