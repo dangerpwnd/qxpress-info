@@ -16,6 +16,10 @@ const QxTable = (props) => {
       {
         Header: 'Date',
         accessor: 'jobDate',
+        Cell: ({ value }) => {
+          const date = new Date(value).toISOString().split('T')[0];
+          return date;
+        },
       },
       {
         Header: 'Builder',
