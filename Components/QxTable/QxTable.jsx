@@ -1,12 +1,11 @@
 import React, { useState, useMemo } from 'react';
+import Modal from '../Modal';
 import { useTable, useSortBy, usePagination } from 'react-table';
 
 const QxTable = (props) => {
   const { formData } = props;
 
   const [showModal, setShowModal] = useState(false);
-
-  const [jobInfo, setJobInfo] = useState({ content: '' });
 
   const data = useMemo(() => {
     return formData;
@@ -48,8 +47,9 @@ const QxTable = (props) => {
         Cell: ({ cell }) => (
           <button
             value="Job Notes"
+            className="text-x1 text-white font-bold border-2 m-2 p-2 border-white rounded-lg bg-mute-purp hover:bg-white focus:bg-white hover:border-mute-purp focus:border-mute-purp hover:text-mute-purp focus:text-mute-purp"
             onClick={() => {
-              handleNotesClick(cell.value);
+              handleOpenModal(cell.value);
             }}
           >
             Job Notes
@@ -94,10 +94,9 @@ const QxTable = (props) => {
     state: { pageIndex, pageSize },
   } = tableInstance;
 
-  const handleNotesClick = (jobinfo) => {
-    console.log(jobinfo);
-    setJobInfo({ content: jobinfo });
+  const handleOpenModal = (notes) => {
     setShowModal(true);
+    return <Modal show={showModal} notes={notes} />;
   };
 
   const handleCloseModal = () => {
@@ -196,6 +195,7 @@ const QxTable = (props) => {
           <input
             type="number"
             defaultValue={pageIndex + 1}
+            className="text-black pl-2"
             onChange={(e) => {
               const page = e.target.value ? Number(e.target.value) - 1 : 0;
               gotoPage(page);
@@ -205,6 +205,7 @@ const QxTable = (props) => {
         </span>{' '}
         <select
           value={pageSize}
+          className="text-black"
           onChange={(e) => {
             setPageSize(Number(e.target.value));
           }}
@@ -216,18 +217,6 @@ const QxTable = (props) => {
           ))}
         </select>
       </div>
-      {/* <ReactModal
-        isOpen={showModal}
-        contentLabel={"Job Notes"}
-        appElement={document.getElementById('root')}
-        onRequestClose={handleCloseModal}
-        shouldCloseOnOverlayClick={true}
-        shouldCloseOnEsc={true}
-        overlayClassName={"Overlay"}
-        className={"Modal"}
-      >
-        <p>{jobInfo.content}</p>
-      </ReactModal> */}
     </div>
   );
 };
