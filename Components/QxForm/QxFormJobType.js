@@ -3,8 +3,6 @@ import { CSVLink } from 'react-csv';
 import axios from 'axios';
 
 import QxTable from '../QxTable/QxTable';
-import './QxForm.module.css';
-import image from '../../public/logo.png';
 
 const today = new Date().toISOString().split('T')[0];
 
@@ -78,13 +76,9 @@ const QxFormJobType = () => {
 
   const handleSplitCol = (resp) => {
     resp.forEach((col) => {
-      if (col.jobAddress !== null) {
-        let addrProps = col.jobAddress.split(/[-]+/);
-        col.Address = addrProps[0];
-        col.Community = addrProps[1];
-      } else {
-        return;
-      }
+      let addrProps = col.jobAddress.split(/[-]+/);
+      col.Address = addrProps[0];
+      col.Community = addrProps[1];
     });
     setJobData(resp);
   };
@@ -94,7 +88,9 @@ const QxFormJobType = () => {
   const handleDateFormat = (resp) => {
     resp.forEach((col) => {
       const newDate = new Date(col.jobDate).toISOString().split('T')[0];
+      console.log(newDate);
       col.jobDate = newDate;
+      console.log(col.jobDate);
     });
     setJobData(resp);
   };
@@ -155,7 +151,7 @@ const QxFormJobType = () => {
           aria-required="true"
           required
         >
-          <option defaultValue disabled value="">
+          <option defaultValue value="">
             Select Stage
           </option>
           {jobTypeList}
@@ -178,7 +174,7 @@ const QxFormJobType = () => {
         </CSVLink>
       </form>
       {isLoading ? (
-        <img className="CPTFade" src={image} alt="Cathedral Logo" />
+        <img className="CPTFade" src="/logo.png" alt="Cathedral Logo" />
       ) : (
         <>
           <QxTable formData={jobData} />
