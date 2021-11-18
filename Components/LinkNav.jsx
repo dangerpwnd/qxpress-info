@@ -16,14 +16,14 @@ const LinkNav = (props) => {
       <nav className="w-full flex flex-col justify-evenly">
         <div className="navlink" onMouseEnter={onEnter} onMouseLeave={onLeave}>
           <Link href="/jobtypes">
-            <a className="text-white border-2 border-white bg-mute-purp p-2">
+            <a className="text-white border-2 border-white bg-mute-purp p-2 hover:bg-white focus:bg-white hover:border-mute-purp focus:border-mute-purp hover:text-mute-purp focus:text-mute-purp">
               By Job Types
             </a>
           </Link>
         </div>
         <div className="navlink" onMouseEnter={onEnter} onMouseLeave={onLeave}>
           <Link href="/techs">
-            <a className="text-white border-2 border-white bg-mute-purp p-2">
+            <a className="text-white border-2 border-white bg-mute-purp p-2 hover:bg-white focus:bg-white hover:border-mute-purp focus:border-mute-purp hover:text-mute-purp focus:text-mute-purp">
               By Techs
             </a>
           </Link>
