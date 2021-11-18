@@ -20,6 +20,12 @@ const QxFormTech = () => {
   const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
+    if (jobData.length > 0) {
+      setLoading(false);
+    }
+  }, [jobData]);
+
+  useEffect(() => {
     axios
       .get('/api/techs')
       .then((resp) => {

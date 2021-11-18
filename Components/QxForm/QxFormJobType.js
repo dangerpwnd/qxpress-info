@@ -88,9 +88,7 @@ const QxFormJobType = () => {
   const handleDateFormat = (resp) => {
     resp.forEach((col) => {
       const newDate = new Date(col.jobDate).toISOString().split('T')[0];
-      console.log(newDate);
       col.jobDate = newDate;
-      console.log(col.jobDate);
     });
     setJobData(resp);
   };
