@@ -3,8 +3,6 @@ import { CSVLink } from 'react-csv';
 import axios from 'axios';
 
 import QxTable from '../QxTable/QxTable';
-import './QxForm.module.css';
-import image from '../../public/logo.png';
 
 const today = new Date().toISOString().split('T')[0];
 const QxFormTech = () => {
@@ -21,10 +19,15 @@ const QxFormTech = () => {
   const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (jobData.length > 0) {
-      setLoading(false);
-    }
-  }, [jobData]);
+    axios
+      .get('/api/techs')
+      .then((resp) => {
+        setTechData(resp.data);
+      })
+      .catch(() => {
+        alert('Tech API Not Available');
+      });
+  }, []);
 
   useEffect(() => {
     axios
@@ -57,6 +60,7 @@ const QxFormTech = () => {
           formData.endDate
       )
       .then((resp) => {
+        console.log(resp);
         resp.data.length !== 0 ? handleSplitCol(resp.data) : setLoading(false);
         resp.data.length !== 0
           ? handleDateFormat(resp.data)
@@ -77,13 +81,9 @@ const QxFormTech = () => {
 
   const handleSplitCol = (resp) => {
     resp.forEach((col) => {
-      if (col.jobAddress !== null) {
-        let addrProps = col.jobAddress.split(/[-]+/);
-        col.Address = addrProps[0];
-        col.Community = addrProps[1];
-      } else {
-        return;
-      }
+      let addrProps = col.jobAddress.split(/[-]+/);
+      col.Address = addrProps[0];
+      col.Community = addrProps[1];
     });
     setJobData(resp);
   };
@@ -147,7 +147,7 @@ const QxFormTech = () => {
           aria-required="true"
           required
         >
-          <option defaultValue disabled value="">
+          <option defaultValue value="">
             Select Tech
           </option>
           {techList}
@@ -170,7 +170,7 @@ const QxFormTech = () => {
         </CSVLink>
       </form>
       {isLoading ? (
-        <img className="CPTFade" src={image} alt="Cathedral Logo" />
+        <img className="CPTFade" src="/logo.png" alt="Cathedral Logo" />
       ) : (
         <>
           <QxTable formData={jobData} />
