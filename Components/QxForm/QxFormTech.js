@@ -5,6 +5,7 @@ import axios from 'axios';
 import QxTable from '../QxTable/QxTable';
 
 const today = new Date().toISOString().split('T')[0];
+
 const QxFormTech = () => {
   // States
 
@@ -25,17 +26,6 @@ const QxFormTech = () => {
         setTechData(resp.data);
       })
       .catch(() => {
-        alert('Tech API Not Available');
-      });
-  }, []);
-
-  useEffect(() => {
-    axios
-      .get('/api/techs')
-      .then((resp) => {
-        setTechData(resp.data);
-      })
-      .catch((err) => {
         alert('Tech API Not Available');
       });
   }, []);
@@ -142,7 +132,7 @@ const QxFormTech = () => {
         <select
           name="tech"
           onChange={inputChangeHandler}
-          value={qxForm.stage}
+          value={qxForm.tech}
           aria-labelledby="techlabel"
           aria-required="true"
           required
