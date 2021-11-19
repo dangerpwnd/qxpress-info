@@ -56,7 +56,6 @@ const QxFormTech = () => {
           formData.endDate
       )
       .then((resp) => {
-        console.log(resp);
         resp.data.length !== 0 ? handleSplitCol(resp.data) : setLoading(false);
         resp.data.length !== 0
           ? handleDateFormat(resp.data)
