@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import Modal from '../Modal';
 import { useTable, useSortBy, usePagination } from 'react-table';
 
@@ -6,6 +6,21 @@ const QxTable = (props) => {
   const { formData } = props;
 
   const [showModal, setShowModal] = useState(false);
+  const [notes, setNotes] = useState([]);
+
+  const escFunction = useCallback((event) => {
+    if (event.keyCode === 27) {
+      setShowModal(false);
+    }
+  });
+
+  useEffect(() => {
+    document.addEventListener('keydown', escFunction, false);
+
+    return () => {
+      document.removeEventListener('keydown', escFunction, false);
+    };
+  }, []);
 
   const data = useMemo(() => {
     return formData;
@@ -52,8 +67,10 @@ const QxTable = (props) => {
           <button
             className="text-x1 text-white font-bold border-2 m-2 p-2 border-white rounded-lg bg-mute-purp hover:bg-white focus:bg-white hover:border-mute-purp focus:border-mute-purp hover:text-mute-purp focus:text-mute-purp"
             onClick={() => {
-              console.log(value);
-              handleOpenModal(value);
+              let notes = { value };
+              let splitNotes = notes.value.split('\n');
+              setNotes(splitNotes);
+              handleOpenModal();
             }}
           >
             Job Notes
@@ -82,6 +99,14 @@ const QxTable = (props) => {
     []
   );
 
+  const handleOpenModal = () => {
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+
   const tableInstance = useTable(
     {
       columns,
@@ -107,15 +132,6 @@ const QxTable = (props) => {
     setPageSize,
     state: { pageIndex, pageSize },
   } = tableInstance;
-
-  const handleOpenModal = (notes) => {
-    setShowModal(true);
-    return <Modal notes={notes} show={showModal} />;
-  };
-
-  const handleCloseModal = () => {
-    setShowModal(false);
-  };
 
   return (
     <div className="flex flex-col items-center mb-4">
@@ -231,6 +247,7 @@ const QxTable = (props) => {
           ))}
         </select>
       </div>
+      {showModal ? <Modal notes={notes} /> : null}
     </div>
   );
 };
