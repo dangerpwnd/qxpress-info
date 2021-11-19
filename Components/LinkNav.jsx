@@ -33,7 +33,7 @@ const LinkNav = (props) => {
         <h1 className="text-center text-3xl">{props.heading}</h1>
       </div>
       <div className="self-center">
-        <h1 className="text-center">What would you like here?</h1>
+        <h1 className="text-center">Additional Feature Coming Soon!</h1>
       </div>
     </div>
   );
