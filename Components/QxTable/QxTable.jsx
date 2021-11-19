@@ -47,13 +47,13 @@ const QxTable = (props) => {
       },
       {
         Header: 'Notes',
-        accessor: 'job_Notes',
-        Cell: ({ cell }) => (
+        accessor: 'jobNotes',
+        Cell: ({ value }) => (
           <button
-            value="Job Notes"
             className="text-x1 text-white font-bold border-2 m-2 p-2 border-white rounded-lg bg-mute-purp hover:bg-white focus:bg-white hover:border-mute-purp focus:border-mute-purp hover:text-mute-purp focus:text-mute-purp"
             onClick={() => {
-              handleOpenModal(cell.value);
+              console.log(value);
+              handleOpenModal(value);
             }}
           >
             Job Notes
@@ -63,6 +63,16 @@ const QxTable = (props) => {
       {
         Header: 'Color',
         accessor: 'jobColor',
+        Cell: ({ value }) => {
+          if (value == 'white') {
+            return <span className={`bg-${value} block`}>{value}</span>;
+          }
+          return (
+            <span className={`bg-${value}-500 text-${value}-500 block`}>
+              {value}
+            </span>
+          );
+        },
       },
       {
         Header: 'Crew',
@@ -100,7 +110,7 @@ const QxTable = (props) => {
 
   const handleOpenModal = (notes) => {
     setShowModal(true);
-    return <Modal show={showModal} notes={notes} />;
+    return <Modal notes={notes} show={showModal} />;
   };
 
   const handleCloseModal = () => {
