@@ -108,9 +108,9 @@ const QxFormTech = () => {
   });
 
   return (
-    <div className="w-3/4 m-auto">
+    <div className="w-full m-auto lg:w-11/12">
       <form
-        className="w-1/3 my-8 mx-auto grid gap-2 grid-cols-2 place-items-center border-2 bg-off-white border-white rounded-lg py-2 text-black font-bold"
+        className="w-3/4 my-8 mx-auto grid gap-2 grid-cols-2 place-items-center border-2 bg-off-white border-white rounded-lg py-2 text-black font-bold lg:w-1/3"
         onSubmit={submitFormHandler}
       >
         <label id="startlabel">Start Date</label>

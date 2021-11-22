@@ -137,7 +137,7 @@ const QxTable = (props) => {
     <div className="flex flex-col items-center mb-4">
       <table
         {...getTableProps()}
-        className="mb-4 border-collapse rounded-lg overflow-hidden"
+        className="mb-4 border-collapse rounded-lg overflow-hidden text-sm lg:text-xl"
       >
         <thead>
           {
@@ -221,8 +221,9 @@ const QxTable = (props) => {
           </strong>{' '}
         </span>
         <span>
-          | Go to page:{' '}
+          <label for="pageNumber">| Go to page: </label>
           <input
+            id="pageNumber"
             type="number"
             defaultValue={pageIndex + 1}
             className="text-black pl-2"
