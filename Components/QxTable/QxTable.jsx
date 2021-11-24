@@ -221,9 +221,8 @@ const QxTable = (props) => {
           </strong>{' '}
         </span>
         <span>
-          <label for="pageNumber">| Go to page: </label>
+          <label id="pageNumber">| Go to page: </label>
           <input
-            id="pageNumber"
             type="number"
             defaultValue={pageIndex + 1}
             className="text-black pl-2"
