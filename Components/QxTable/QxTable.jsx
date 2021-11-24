@@ -5,22 +5,35 @@ import { useTable, useSortBy, usePagination } from 'react-table';
 const QxTable = (props) => {
   const { formData } = props;
 
-  const [showModal, setShowModal] = useState(false);
   const [notes, setNotes] = useState([]);
 
   const escFunction = useCallback((event) => {
     if (event.keyCode === 27) {
-      setShowModal(false);
+      const outer = document.querySelector('.outer');
+      outer.classList.remove('open');
     }
   });
 
+  const clickFunction = (event) => {
+    if (event.target.matches('.inner')) {
+      const outer = document.querySelector('.outer');
+      outer.classList.remove('open');
+    }
+  };
+
   useEffect(() => {
     document.addEventListener('keydown', escFunction, false);
-
+    document.addEventListener('click', clickFunction, false);
     return () => {
       document.removeEventListener('keydown', escFunction, false);
+      document.removeEventListener('click', clickFunction, false);
     };
   }, []);
+
+  const handleOpenModal = () => {
+    const outer = document.querySelector('.outer');
+    outer.classList.add('open');
+  };
 
   const data = useMemo(() => {
     return formData;
@@ -98,14 +111,6 @@ const QxTable = (props) => {
     ],
     []
   );
-
-  const handleOpenModal = () => {
-    setShowModal(true);
-  };
-
-  const handleCloseModal = () => {
-    setShowModal(false);
-  };
 
   const tableInstance = useTable(
     {
@@ -247,7 +252,7 @@ const QxTable = (props) => {
           ))}
         </select>
       </div>
-      {showModal ? <Modal notes={notes} /> : null}
+      <Modal notes={notes} />
     </div>
   );
 };
