@@ -94,14 +94,42 @@ const QxTable = (props) => {
         Header: 'Color',
         accessor: 'jobColor',
         Cell: ({ value }) => {
-          if (value == 'white') {
-            return <span className={`bg-${value} block`}>{value}</span>;
+          switch (value) {
+            case 'white':
+              return <span className="bg-white text-white block">white</span>;
+              break;
+            case 'teal':
+              return <span className="bg-teal text-teal block">teal</span>;
+              break;
+            case 'orange':
+              return (
+                <span className="bg-orange text-orange block">orange</span>
+              );
+              break;
+            case 'yellow':
+              return (
+                <span className="bg-yellow text-yellow block">yellow</span>
+              );
+              break;
+            case 'grey':
+              return <span className="bg-grey text-grey block">grey</span>;
+              break;
+            case 'green':
+              return <span className="bg-green text-green block">green</span>;
+              break;
+            case 'red':
+              return <span className="bg-red text-red block">red</span>;
+              break;
+            case 'pink':
+              return <span className="bg-pink text-pink block">pink</span>;
+              break;
+            case 'brown':
+              return <span className="bg-brown text-brown block">brown</span>;
+              break;
+            default:
+              return <span className="bg-white text-white block">white</span>;
+              break;
           }
-          return (
-            <span className={`bg-${value}-500 text-${value}-500 block`}>
-              {value}
-            </span>
-          );
         },
       },
       {
@@ -151,7 +179,7 @@ const QxTable = (props) => {
               // Apply the header row props
               <tr
                 {...headerGroup.getHeaderGroupProps()}
-                className="grid grid-cols-10 border-b-4 border-white-500 bg-off-white"
+                className="grid grid-cols-10 border-b-4 border-white bg-off-white"
               >
                 {
                   // Loop over the headers in each row
