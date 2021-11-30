@@ -20,7 +20,7 @@ const Modal = ({ notes }) => {
                 <h2 className="text-2xl text-black">Job Notes</h2>
                 {notes.map((note) => {
                   return (
-                    <p key={note} className="text-sm text-gray">
+                    <p key={note} className="text-sm text-gray-500">
                       {note}
                     </p>
                   );
