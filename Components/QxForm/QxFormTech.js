@@ -155,6 +155,7 @@ const QxFormTech = () => {
         </button>
         <CSVLink
           data={jobData}
+          filename={`${today}-QxInfo`}
           style={{
             cursor: 'pointer',
             font: 'inherit',
