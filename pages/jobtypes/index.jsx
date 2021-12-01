@@ -9,7 +9,7 @@ const ByJobTypes = () => {
     <>
       <Head>
         <title>Qxpress Info - By Job Types</title>
-        <link rel="icon" href="cp.ico" />
+        <link rel="icon" href="/CP.ico" />
       </Head>
       <main>
         <ErrorBoundary>

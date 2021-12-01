@@ -6,7 +6,7 @@ const Home = () => (
   <>
     <Head>
       <title>Qxpress Info - Home</title>
-      <link rel="icon" href="cp.ico" />
+      <link rel="icon" href="/CP.ico" />
     </Head>
     <main
       className="flex flex-col justify-evenly items-center h-96"
