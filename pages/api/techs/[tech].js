@@ -1,7 +1,9 @@
 import config from '../../../knexconf';
+import configArchive from '../../../knexconfarchive';
 import nc from 'next-connect';
 
-const knex = require('knex')(config);
+const knexUpdated = require('knex')(config);
+const knexArchive = require('knex')(configArchive);
 
 const handleDateFormat = (resp) => {
   resp.forEach((col) => {
@@ -12,31 +14,60 @@ const handleDateFormat = (resp) => {
 
 const getJobsByTechs = nc().get((req, res) => {
   const { tech, start, end } = req.query;
-
-  const knexQuery = () => {
-    knex({ qx: 'QXInfo' })
-      .where('qx.Job_Crew', tech)
-      .whereBetween('qx.Job_Date', [start, end])
-      .select({
-        jobDate: 'qx.Job_Date',
-        jobBuilder: 'qx.Job_Builder',
-        jobAddress: 'qx.Job_Address',
-        jobCity: 'qx.Job_City',
-        jobPostal: 'qx.Job_Postal',
-        jobStage: 'qx.Job_Descrip',
-        jobNotes: 'qx.Job_Notes',
-        jobColor: 'qx.Job_Color',
-        jobCrew: 'qx.Job_Crew',
-      })
-      .then((resp) => {
-        handleDateFormat(resp);
-        res.send(resp);
-      })
-      .catch((err) => {
-        res.json(err);
-      });
-  };
-  knexQuery();
+  if(start <= '2015-12-31' && end <= '2015-12-31' ){
+    const knexQuery = () => {
+      console.log('Using Archive DB');
+      knexArchive({ qx: 'QXInfo' })
+        .where('qx.Job_Crew', tech)
+        .whereBetween('qx.Job_Date', [start, end])
+        .select({
+          jobDate: 'qx.Job_Date',
+          jobBuilder: 'qx.Job_Builder',
+          jobAddress: 'qx.Job_Address',
+          jobCity: 'qx.Job_City',
+          jobPostal: 'qx.Job_Postal',
+          jobStage: 'qx.Job_Descrip',
+          jobNotes: 'qx.Job_Notes',
+          jobColor: 'qx.Job_Color',
+          jobCrew: 'qx.Job_Crew',
+        })
+        .then((resp) => {
+          handleDateFormat(resp);
+          res.send(resp);
+        })
+        .catch((err) => {
+          res.json(err);
+        });
+    };
+    knexQuery();
+  }
+  else {
+    const knexQuery = () => {
+      console.log('Using Updated DB');
+      knexUpdated({ qx: 'QXInfo' })
+        .where('qx.Job_Crew', tech)
+        .whereBetween('qx.Job_Date', [start, end])
+        .select({
+          jobDate: 'qx.Job_Date',
+          jobBuilder: 'qx.Job_Builder',
+          jobAddress: 'qx.Job_Address',
+          jobCity: 'qx.Job_City',
+          jobPostal: 'qx.Job_Postal',
+          jobStage: 'qx.Job_Descrip',
+          jobNotes: 'qx.Job_Notes',
+          jobColor: 'qx.Job_Color',
+          jobCrew: 'qx.Job_Crew',
+        })
+        .then((resp) => {
+          handleDateFormat(resp);
+          res.send(resp);
+        })
+        .catch((err) => {
+          res.json(err);
+        });
+    };
+    knexQuery();
+  }
 });
 
 export default getJobsByTechs;
