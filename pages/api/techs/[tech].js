@@ -13,7 +13,6 @@ const handleDateFormat = (resp) => {
 const getJobsByTechs = nc().get((req, res) => {
   const { tech, start, end } = req.query;
   const knexQuery = () => {
-    console.log('Using Updated DB');
     knexUpdated({ qx: 'QXInfo' })
       .where('qx.Job_Crew', tech)
       .whereBetween('qx.Job_Date', [start, end])

@@ -14,7 +14,6 @@ const getJobsByJobType = nc().get((req, res) => {
   const { jobtype, start, end } = req.query;
   {
     const knexQuery = () => {
-      console.log('Using Updated DB');
       knexUpdated({ qx: 'QXInfo' })
         .where('qx.Job_Descrip', 'like', `%${jobtype}%`)
         .whereBetween('qx.Job_Date', [start, end])
