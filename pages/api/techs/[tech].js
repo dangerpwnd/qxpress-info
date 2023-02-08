@@ -29,7 +29,7 @@ const getJobsByTechs = nc().get((req, res) => {
         jobColor: 'qx.Job_Color',
         jobCrew: 'qx.Job_Crew',
       })
-      .orderBy('qx.Job_Crew', 'desc')
+      .orderBy('jobCrew', 'desc')
       .then((resp) => {
         handleDateFormat(resp);
         res.send(resp);
