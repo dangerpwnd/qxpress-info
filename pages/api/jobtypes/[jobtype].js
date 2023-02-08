@@ -2,7 +2,6 @@ import config from '../../../knexconf';
 import nc from 'next-connect';
 
 const knexUpdated = require('knex')(config);
-const knexArchive = require('knex')(configArchive);
 
 const handleDateFormat = (dates) => {
   dates.forEach((col) => {
