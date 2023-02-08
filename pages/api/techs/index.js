@@ -9,7 +9,6 @@ const getTechs = nc().get((req, res) => {
       .select({
         CrewName: 'qx.Crew_Name',
       })
-      .orderBy('qx.Job_Crew', 'desc')
       .then((resp) => {
         res.send(resp);
       })
