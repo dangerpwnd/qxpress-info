@@ -9,6 +9,7 @@ const getTechs = nc().get((req, res) => {
       .select({
         CrewName: 'qx.Crew_Name',
       })
+      .orderBy('qx.Crew_Name', 'asc')
       .then((resp) => {
         res.send(resp);
       })
