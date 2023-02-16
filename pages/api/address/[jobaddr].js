@@ -3,6 +3,13 @@ import nc from 'next-connect';
 
 const knex = require('knex')(config);
 
+const handleDateFormat = (dates) => {
+  dates.forEach((col) => {
+    const newDate = new Date(col.jobDate).toISOString().split('T')[0];
+    col.jobDate = newDate;
+  });
+};
+
 const getJobsByAddress = nc().get((req, res) => {
   const knexQuery = () => {
     const { jobaddr } = req.query;
@@ -20,7 +27,8 @@ const getJobsByAddress = nc().get((req, res) => {
         jobCrew: 'qx.Job_Crew',
       })
       .then((resp) => {
-        res.sendDate(resp);
+        handleDateFormat(resp);
+        res.send(resp);
       })
       .catch((err) => {
         res.json(err);
