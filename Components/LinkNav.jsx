@@ -33,7 +33,16 @@ const LinkNav = (props) => {
         <h1 className="text-center text-3xl">{props.heading}</h1>
       </div>
       <div className="self-center">
-        <h1 className="text-center">Additional Feature Coming Soon!</h1>
+        <h1 className="text-center text-xl">Enter Job Address:</h1>
+        <form className="text-center">
+          <input type="text" name="address" />
+          <button
+            type="submit"
+            className="text-x1 text-white font-bold border-2 m-2 p-2 border-white rounded-lg bg-mute-purp hover:bg-white focus:bg-white hover:border-mute-purp focus:border-mute-purp hover:text-mute-purp focus:text-mute-purp"
+          >
+            Find Address
+          </button>
+        </form>
       </div>
     </div>
   );
