@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { gsap } from 'gsap';
 
 const LinkNav = (props) => {
+  //States
+  const [addrData, setAddrData] = useState('');
+
+  //Animations
   const onEnter = ({ currentTarget }) => {
     gsap.to(currentTarget, { x: 50 });
   };
