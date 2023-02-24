@@ -1,10 +1,11 @@
 import React from 'react';
 import Head from 'next/head';
-import LinkNav from '../../Components/LinkNav';
 
+import LinkNav from '../../Components/LinkNav';
+import QxFormAddress from '../../Components/QxForm/QxFormAddress';
 import ErrorBoundary from '../../Components/ErrorBoundary';
 
-const ByAddress = () => {
+const ByAddress = (address) => {
   return (
     <>
       <Head>
@@ -14,6 +15,7 @@ const ByAddress = () => {
       <main>
         <ErrorBoundary>
           <LinkNav className="h-1/3" heading="Qxpress Job Reports By Address" />
+          <QxFormAddress address={address} />
         </ErrorBoundary>
       </main>
     </>
