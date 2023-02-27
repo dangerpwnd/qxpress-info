@@ -12,6 +12,7 @@ const handleDateFormat = (dates) => {
 
 const getJobsByAddress = nc().get((req, res) => {
   const knexQuery = () => {
+    console.log(req.query);
     const { jobaddr } = req.query;
     knex({ qx: 'QXInfo' })
       .where('qx.Job_Address', 'like', `%${jobaddr}%`)
