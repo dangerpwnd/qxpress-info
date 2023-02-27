@@ -5,7 +5,7 @@ import { gsap } from 'gsap';
 const LinkNav = (props) => {
   // States
 
-  const [addrData, setAddrData] = useState('');
+  const [addrData, setAddrData] = useState(props.address);
 
   // Animations
 

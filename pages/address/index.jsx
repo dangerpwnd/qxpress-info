@@ -5,7 +5,9 @@ import LinkNav from '../../Components/LinkNav';
 import QxFormAddress from '../../Components/QxForm/QxFormAddress';
 import ErrorBoundary from '../../Components/ErrorBoundary';
 
-const ByAddress = (address) => {
+const ByAddress = (props) => {
+  const { address } = props;
+
   return (
     <>
       <Head>
