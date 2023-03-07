@@ -5,7 +5,7 @@ import { gsap } from 'gsap';
 const LinkNav = (props) => {
   // States
 
-  const [addrData, setAddrData] = useState(props.address);
+  const [addrData, setAddrData] = useState('');
 
   // Animations
 
@@ -53,7 +53,7 @@ const LinkNav = (props) => {
             name="address"
             onChange={inputChangeHandler}
           />
-          <Link href={`/address/${encodeURIComponent(addrData)}`}>
+          <Link href={`/address?addr=${encodeURIComponent(addrData)}`}>
             <a className="text-x1 text-white font-bold border-2 m-2 p-2 border-white rounded-lg bg-mute-purp hover:bg-white focus:bg-white hover:border-mute-purp focus:border-mute-purp hover:text-mute-purp focus:text-mute-purp">
               Find Address
             </a>
