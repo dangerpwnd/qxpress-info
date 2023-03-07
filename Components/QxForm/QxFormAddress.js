@@ -4,7 +4,7 @@ import axios from 'axios';
 
 import QxTable from '../QxTable/QxTable';
 
-const QxFormAddress = (address) => {
+const QxFormAddress = ({ address }) => {
   // States
 
   const [jobData, setJobData] = useState([]);
