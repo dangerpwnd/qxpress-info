@@ -28,16 +28,16 @@ const LinkNav = (props) => {
       <nav className="w-full flex flex-col justify-evenly">
         <div className="navlink" onMouseEnter={onEnter} onMouseLeave={onLeave}>
           <Link href="/jobtypes">
-            <a className="text-white border-2 border-white bg-mute-purp p-2 hover:bg-white focus:bg-white hover:border-mute-purp focus:border-mute-purp hover:text-mute-purp focus:text-mute-purp">
+            <button className="text-white border-2 border-white bg-mute-purp p-2 hover:bg-white focus:bg-white hover:border-mute-purp focus:border-mute-purp hover:text-mute-purp focus:text-mute-purp">
               By Job Types
-            </a>
+            </button>
           </Link>
         </div>
         <div className="navlink" onMouseEnter={onEnter} onMouseLeave={onLeave}>
           <Link href="/techs">
-            <a className="text-white border-2 border-white bg-mute-purp p-2 hover:bg-white focus:bg-white hover:border-mute-purp focus:border-mute-purp hover:text-mute-purp focus:text-mute-purp">
+            <button className="text-white border-2 border-white bg-mute-purp p-2 hover:bg-white focus:bg-white hover:border-mute-purp focus:border-mute-purp hover:text-mute-purp focus:text-mute-purp">
               By Techs
-            </a>
+            </button>
           </Link>
         </div>
       </nav>
@@ -54,9 +54,9 @@ const LinkNav = (props) => {
             onChange={inputChangeHandler}
           />
           <Link href={`/address?addr=${encodeURIComponent(addrData)}`}>
-            <a className="text-x1 text-white font-bold border-2 m-2 p-2 border-white rounded-lg bg-mute-purp hover:bg-white focus:bg-white hover:border-mute-purp focus:border-mute-purp hover:text-mute-purp focus:text-mute-purp">
+            <button className="text-x1 text-white font-bold border-2 m-2 p-2 border-white rounded-lg bg-mute-purp hover:bg-white focus:bg-white hover:border-mute-purp focus:border-mute-purp hover:text-mute-purp focus:text-mute-purp">
               Find Address
-            </a>
+            </button>
           </Link>
         </div>
       </div>
