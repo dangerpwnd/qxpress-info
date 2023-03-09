@@ -19,12 +19,12 @@ const Home = () => (
         </h3>
         <div className="my-8 mx-auto w-3/5 flex justify-evenly">
           <Link href="/jobtypes">
-            <button className="text-2xl w-1/3 text-white border-2 border-white rounded-lg bg-mute-purp p-2 hover:bg-white focus:bg-white hover:border-mute-purp focus:border-mute-purp hover:text-mute-purp focus:text-mute-purp">
+            <button className="text-2xl text-white border-2 border-white rounded-lg bg-mute-purp p-2 hover:bg-white focus:bg-white hover:border-mute-purp focus:border-mute-purp hover:text-mute-purp focus:text-mute-purp">
               Job Types
             </button>
           </Link>
           <Link href="/techs">
-            <button className="text-2xl w-1/3 text-white border-2 border-white rounded-lg bg-mute-purp p-2 hover:bg-white focus:bg-white hover:border-mute-purp focus:border-mute-purp hover:text-mute-purp focus:text-mute-purp">
+            <button className="text-2xl text-white border-2 border-white rounded-lg bg-mute-purp p-2 hover:bg-white focus:bg-white hover:border-mute-purp focus:border-mute-purp hover:text-mute-purp focus:text-mute-purp">
               Techs
             </button>
           </Link>
