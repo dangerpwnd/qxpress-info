@@ -3,6 +3,10 @@ import nc from 'next-connect';
 
 const knex = require('knex')(config);
 
+// Handlers
+
+// Logic to change format of date
+
 const handleDateFormat = (dates) => {
   dates.forEach((col) => {
     const newDate = new Date(col.jobDate).toISOString().split('T')[0];
@@ -29,9 +33,11 @@ const getJobsByAddress = nc().get((req, res) => {
       })
       .then((resp) => {
         handleDateFormat(resp);
+        console.log(resp);
         res.send(resp);
       })
       .catch((err) => {
+        console.log(err);
         res.json(err);
       });
   };
