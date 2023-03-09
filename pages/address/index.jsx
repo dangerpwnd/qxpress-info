@@ -19,7 +19,7 @@ const ByAddress = () => {
       <main>
         <ErrorBoundary>
           <LinkNav className="h-1/3" heading="Qxpress Job Reports By Address" />
-          {addr ? <QxFormAddress address={addr} /> : null}
+          <QxFormAddress address={addr} />
         </ErrorBoundary>
       </main>
     </>
