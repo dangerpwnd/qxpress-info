@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 
@@ -10,6 +10,20 @@ const ByAddress = () => {
   const router = useRouter();
   const { addr } = router.query;
 
+  const [componentKey, setComponentKey] = useState(0);
+
+  useEffect(() => {
+    const handleRouteChange = () => {
+      setComponentKey(componentKey + 1);
+    };
+
+    router.events.on('routeChangeComplete', handleRouteChange);
+
+    return () => {
+      router.events.off('routeChangeComplete', handleRouteChange);
+    };
+  }, [componentKey, router]);
+
   return (
     <>
       <Head>
@@ -19,7 +33,7 @@ const ByAddress = () => {
       <main>
         <ErrorBoundary>
           <LinkNav className="h-1/3" heading="Qxpress Job Reports By Address" />
-          <QxFormAddress address={addr} />
+          <QxFormAddress address={addr} key={componentKey} />
         </ErrorBoundary>
       </main>
     </>
