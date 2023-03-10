@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { gsap } from 'gsap';
 
-const LinkNav = (props) => {
+const LinkNav = ({ heading }) => {
   // States
 
   const [addrData, setAddrData] = useState('');
@@ -42,7 +42,7 @@ const LinkNav = (props) => {
         </div>
       </nav>
       <div className="self-center">
-        <h1 className="text-center text-3xl">{props.heading}</h1>
+        <h1 className="text-center text-3xl">{heading}</h1>
       </div>
       <div className="self-center">
         <h1 className="text-center text-xl pb-4">Enter Job Address:</h1>
