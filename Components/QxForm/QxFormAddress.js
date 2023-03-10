@@ -22,7 +22,7 @@ const QxFormAddress = ({ address }) => {
       .then((resp) => {
         resp.data.length !== 0
           ? handleSplitCol(resp.data)
-          : alert('No data available');
+          : console.log('No data available');
         setJobData(resp.data);
         setLoading(false);
       })
