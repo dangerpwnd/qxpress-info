@@ -45,7 +45,7 @@ const QxFormAddress = ({ address }) => {
   };
 
   return (
-    <main className="w-3/4 mx-auto">
+    <main className="w-full m-auto xl:w-11/12">
       {isLoading ? (
         <img className="CPTFade" src="/logo.png" alt="Cathedral Logo" />
       ) : (

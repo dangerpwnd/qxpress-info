@@ -24,7 +24,7 @@ const LinkNav = ({ heading }) => {
   };
 
   return (
-    <div className="grid grid-cols-3 items-stretch h-24 mb-4">
+    <div className="grid grid-cols-3 items-stretch lg:h-24 h-fit mb-4">
       <nav className="w-full flex flex-col justify-evenly">
         <div className="navlink" onMouseEnter={onEnter} onMouseLeave={onLeave}>
           <Link href="/jobtypes">
