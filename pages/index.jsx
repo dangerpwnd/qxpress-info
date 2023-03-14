@@ -9,27 +9,25 @@ const Home = () => (
       <link rel="icon" href="/CP.ico" />
     </Head>
     <main
-      className="flex flex-col justify-evenly items-center h-96"
+      className="flex flex-col justify-center items-center h-screen lg:justify-start lg:p-4"
       role="main"
     >
-      <h1 className="text-4xl">Qxpress Info</h1>
-      <div className="w-1/2">
-        <h3 className="text-3xl flex flex-col justify-evenly text-center">
-          Search By
-        </h3>
-        <div className="my-8 mx-auto w-3/5 flex justify-evenly">
+      <h1 className="lg:text-4xl text-5xl my-4">Qxpress Info</h1>
+      <div className="lg:w-1/2 w-3/4">
+        <h3 className="lg:text-3xl text-4xl text-center">Search By</h3>
+        <div className="my-8 mx-auto w-3/5 flex lg:flex-row flex-col justify-evenly items-center">
           <Link href="/jobtypes">
-            <button className="text-2xl text-white border-2 border-white rounded-lg  bg-mute-purp p-4 w-40 hover:bg-white focus:bg-white hover:border-mute-purp focus:border-mute-purp hover:text-mute-purp focus:text-mute-purp">
+            <button className="lg:text-2xl text-3xl text-white border-2 border-white rounded-lg  bg-mute-purp p-4 lg:w-40 w-48  hover:bg-white focus:bg-white hover:border-mute-purp focus:border-mute-purp hover:text-mute-purp focus:text-mute-purp">
               Job Types
             </button>
           </Link>
           <Link href="/techs">
-            <button className="text-2xl text-white border-2 border-white rounded-lg bg-mute-purp p-4 w-40 hover:bg-white focus:bg-white hover:border-mute-purp focus:border-mute-purp hover:text-mute-purp focus:text-mute-purp">
+            <button className="lg:text-2xl text-3xl text-white border-2 border-white rounded-lg bg-mute-purp my-4 p-4 lg:w-40 w-48 lg:m-0  hover:bg-white focus:bg-white hover:border-mute-purp focus:border-mute-purp hover:text-mute-purp focus:text-mute-purp">
               Techs
             </button>
           </Link>
           <Link href="/address">
-            <button className="text-2xl text-white border-2 border-white rounded-lg bg-mute-purp p-4 w-40 hover:bg-white focus:bg-white hover:border-mute-purp focus:border-mute-purp hover:text-mute-purp focus:text-mute-purp">
+            <button className="lg:text-2xl text-3xl text-white border-2 border-white rounded-lg bg-mute-purp p-4 lg:w-40 w-48  hover:bg-white focus:bg-white hover:border-mute-purp focus:border-mute-purp hover:text-mute-purp focus:text-mute-purp">
               Address
             </button>
           </Link>
