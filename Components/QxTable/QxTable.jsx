@@ -170,7 +170,7 @@ const QxTable = (props) => {
     <div className="flex flex-col items-center mb-4">
       <table
         {...getTableProps()}
-        className="mb-4 border-collapse rounded-lg overflow-hidden text-sm lg:text-xl"
+        className="mb-4 border-collapse rounded-lg overflow-hidden xl:text-xl"
       >
         <thead>
           {
