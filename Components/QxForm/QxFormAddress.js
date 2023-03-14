@@ -27,7 +27,8 @@ const QxFormAddress = ({ address }) => {
         setLoading(false);
       })
       .catch(() => {
-        alert('Address API Not Available');
+        alert('Enter a Job Address');
+        setLoading(false);
       });
   }, []);
 
