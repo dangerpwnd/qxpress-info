@@ -45,7 +45,7 @@ const LinkNav = ({ heading }) => {
         <h1 className="text-center text-3xl">{heading}</h1>
       </div>
       <div className="self-center">
-        <h1 className="text-center text-xl p-4">Enter Job Address:</h1>
+        <h1 className="text-center text-xl p-2">Enter Job Address:</h1>
         <div className="text-center">
           <input
             type="text"
