@@ -17,7 +17,7 @@ const Modal = ({ notes }) => {
           <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
             <div className="sm:flex sm:items-start">
               <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                <h2 className="text-2xl text-black">Job Notes</h2>
+                <h2 className="text-2xl text-black mb-2">Job Notes</h2>
                 {notes.map((note) => {
                   return (
                     <p key={note} className="text-sm text-gray-500">
