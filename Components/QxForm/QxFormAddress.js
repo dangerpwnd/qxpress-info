@@ -38,10 +38,15 @@ const QxFormAddress = ({ address }) => {
 
   const handleSplitCol = (resp) => {
     resp.forEach((col) => {
+      if (col.jobAddress == null) {
+        col.Address = 'INCORRECT ADDRESS ENTRY ON DATE';
+        return;
+      }
       let addrProps = col.jobAddress.split(/[-]+/);
       col.Address = addrProps[0];
       col.Community = addrProps[1];
     });
+    setJobData(resp);
   };
 
   return (
