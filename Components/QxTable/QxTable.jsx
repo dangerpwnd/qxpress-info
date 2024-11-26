@@ -175,52 +175,65 @@ const QxTable = (props) => {
         <thead>
           {
             // Loop over the header rows
-            headerGroups.map((headerGroup) => (
-              // Apply the header row props
-              <tr
-                {...headerGroup.getHeaderGroupProps()}
-                className="grid grid-cols-10 border-b-4 border-white bg-off-white"
-              >
-                {
-                  // Loop over the headers in each row
-                  headerGroup.headers.map((column) => (
-                    // Apply the header cell props
-                    <th
-                      className="text-black"
-                      {...column.getHeaderProps(column.getSortByToggleProps())}
-                    >
-                      {
-                        // Render the header
-                        column.render('Header')
-                      }
-                      <span>
-                        {column.isSorted
-                          ? column.isSortedDesc
-                            ? ' ⇩'
-                            : ' ⇧'
-                          : ''}{' '}
-                      </span>
-                    </th>
-                  ))
-                }
-              </tr>
-            ))
+            headerGroups.map((headerGroup) => {
+              const { key: headerGroupKey, ...headerGroupProps } =
+                headerGroup.getHeaderGroupProps();
+              return (
+                // Apply the header row props
+                <tr
+                  key={headerGroupKey}
+                  {...headerGroupProps}
+                  className="grid grid-cols-10 border-b-4 border-white bg-off-white"
+                >
+                  {
+                    // Loop over the headers in each row
+                    headerGroup.headers.map((column) => {
+                      const { key: columnKey, ...columnProps } =
+                        column.getHeaderProps(column.getSortByToggleProps());
+                      return (
+                        // Apply the header cell props
+                        <th
+                          key={columnKey}
+                          className="text-black"
+                          {...columnProps}
+                        >
+                          {
+                            // Render the header
+                            column.render('Header')
+                          }
+                          <span>
+                            {column.isSorted
+                              ? column.isSortedDesc
+                                ? ' ⇩'
+                                : ' ⇧'
+                              : ''}{' '}
+                          </span>
+                        </th>
+                      );
+                    })
+                  }
+                </tr>
+              );
+            })
           }
         </thead>
         <tbody {...getTableBodyProps()}>
           {page.map((row) => {
             prepareRow(row);
+            const { key, ...rowProps } = row.getRowProps();
             return (
               <tr
-                {...row.getRowProps()}
+                key={key}
+                {...rowProps}
                 className="grid grid-cols-10 items-center text-center QxRows"
               >
                 {
                   // Loop over the rows cells
                   row.cells.map((cell) => {
+                    const { key, ...cellProps } = cell.getCellProps();
                     // Apply the cell props
                     return (
-                      <td className="text-white" {...cell.getCellProps()}>
+                      <td key={key} {...cellProps} className="text-white">
                         {
                           // Render the cell contents
                           cell.render('Cell')
