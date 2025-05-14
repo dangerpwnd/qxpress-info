@@ -51,7 +51,7 @@ const QxTable = (props) => {
       },
       {
         Header: 'Builder',
-        accessor: 'jobBuilder',
+        accessor: 'Builder',
       },
       {
         Header: 'Community',
