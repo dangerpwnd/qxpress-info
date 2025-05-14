@@ -20,10 +20,13 @@ const QxFormAddress = ({ address }) => {
     axios
       .get('/api/address/' + address)
       .then((resp) => {
-        resp.data.length !== 0
-          ? handleSplitCol(resp.data)
-          : console.log('No data available');
-        setJobData(resp.data);
+        if (resp.data.length !== 0) {
+          const processedData = handleSplitBuilder(handleSplitCol(resp.data));
+
+          setJobData(processedData);
+        } else {
+          console.log('No data available');
+        }
         setLoading(false);
       })
       .catch(() => {
@@ -46,7 +49,21 @@ const QxFormAddress = ({ address }) => {
       col.Address = addrProps[0];
       col.Community = addrProps[1];
     });
-    setJobData(resp);
+    return resp;
+  };
+
+  // Logic to split job_Builder into Builder
+
+  const handleSplitBuilder = (resp) => {
+    resp.forEach((col) => {
+      if (col.jobBuilder == null) {
+        col.Address = 'INCORRECT ADDRESS ENTRY ON DATE';
+        return;
+      }
+      let bldrProps = col.jobBuilder.split(/[:]+/);
+      col.Builder = bldrProps[0];
+    });
+    return resp;
   };
 
   return (

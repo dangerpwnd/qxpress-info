@@ -87,6 +87,20 @@ const QxFormTech = () => {
     setJobData(resp);
   };
 
+  // Logic to split job_Builder into Builder
+
+  const handleSplitBuilder = (resp) => {
+    resp.forEach((col) => {
+      if (col.jobBuilder == null) {
+        col.Address = 'INCORRECT ADDRESS ENTRY ON DATE';
+        return;
+      }
+      let bldrProps = col.jobBuilder.split(/[:]+/);
+      col.Builder = bldrProps[0];
+    });
+    return resp;
+  };
+
   // Logic to change format of date
 
   const handleDateFormat = (resp) => {

@@ -58,6 +58,9 @@ const QxFormJobType = () => {
       .then((resp) => {
         resp.data.length !== 0 ? handleSplitCol(resp.data) : setLoading(false);
         resp.data.length !== 0
+          ? handleSplitBuilder(resp.data)
+          : setLoading(false);
+        resp.data.length !== 0
           ? handleDateFormat(resp.data)
           : setLoading(false);
       })
@@ -85,6 +88,20 @@ const QxFormJobType = () => {
       col.Community = addrProps[1];
     });
     setJobData(resp);
+  };
+
+  // Logic to split job_Builder into Builder
+
+  const handleSplitBuilder = (resp) => {
+    resp.forEach((col) => {
+      if (col.jobBuilder == null) {
+        col.Address = 'INCORRECT ADDRESS ENTRY ON DATE';
+        return;
+      }
+      let bldrProps = col.jobBuilder.split(/[:]+/);
+      col.Builder = bldrProps[0];
+    });
+    return resp;
   };
 
   // Logic to change format of date
