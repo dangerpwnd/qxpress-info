@@ -7,13 +7,13 @@
     "dotenv": "^16.0.3",
     "gsap": "^3.8.0",
     "knex": "^2.4.2",
-    "next": "^13.2.3",
+    "next": "^13.5.11",
     "next-connect": "^0.10.2",
     "prettier": "^2.4.1",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-csv": "latest",
-    "react-dom": "latest",
+    "react-dom": "^18.3.1",
     "react-error-overlay": "^6.0.8",
     "react-table": "^7.6.2",
     "shortid": "^2.2.16",
@@ -22,7 +22,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start -p 80"
+    "start": "next start -p 3000"
   },
   "browserslist": {
     "production": [
